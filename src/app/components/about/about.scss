@@ -184,6 +184,37 @@
   color: #333;
 }
 
+/* ===== Copilot credit ===== */
+.about-copilot {
+  background: linear-gradient(135deg, #f0f4ff 0%, #faf0ff 100%);
+}
+
+.copilot-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.copilot-label {
+  color: #888;
+}
+
+.copilot-sublabel {
+  color: #888;
+}
+
+.copilot-icon {
+  width: 18px;
+  height: 18px;
+  color: #6e40c9;
+  flex-shrink: 0;
+}
+
 /* ===== Footer ===== */
 .about-footer {
   display: flex;

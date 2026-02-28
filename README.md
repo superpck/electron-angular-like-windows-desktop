@@ -168,6 +168,12 @@ Add windows by editing `src/app/configs/desktop-menu.ts`:
 
 [MIT](LICENSE) © 2026 superpck
 
+---
+
+## 🤖 Built with GitHub Copilot
+
+This project was developed with the assistance of **[GitHub Copilot](https://github.com/features/copilot)** — an AI-powered coding assistant by GitHub & OpenAI.
+
 
 To start a local development server, run:
 
