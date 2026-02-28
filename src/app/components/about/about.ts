@@ -24,7 +24,9 @@ export class About {
   buildYear = new Date().getFullYear();
 
   techStack: TechItem[] = [
-    { name: 'Angular', icon: 'assets/images/logo1.png', color: '#dd0031' },
-    { name: 'Electron', icon: 'assets/images/logo2.png', color: '#47848f' },
+    { name: 'Electron', icon: 'assets/images/electron.png', color: '#47848f' },
+    { name: 'Angular', icon: 'assets/images/angular2.png', color: '#dd0031' },
+    { name: 'Material', icon: 'assets/images/material_logo.png', color: '#38b2ac' },
+    { name: 'Tailwind', icon: 'assets/images/tailwind_logo.png', color: '#38b2ac' },
   ];
 }

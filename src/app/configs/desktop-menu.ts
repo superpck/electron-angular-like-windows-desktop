@@ -50,7 +50,7 @@ export const DESKTOP_ICONS: AppItem[] = [
   {
     id: 'profile',
     label: 'Profile',
-    icon: 'assets/images/logo2.png',
+    icon: 'assets/images/profile1.png',
     component: Profile,
     defaultWidth: 600,
     defaultHeight: 400,
@@ -58,7 +58,7 @@ export const DESKTOP_ICONS: AppItem[] = [
   {
     id: 'user',
     label: 'Users',
-    icon: 'assets/images/logo2.png',
+    icon: 'assets/images/user1.png',
     component: User,
     defaultWidth: 0,  // 0 = open maximized
     defaultHeight: 0,
@@ -104,7 +104,7 @@ export const START_MENU_ITEMS: AppItem[] = [
   {
     id: 'about',
     label: 'About',
-    icon: 'assets/images/logo1.png',
+    icon: 'assets/images/about2.png',
     component: About,
     defaultWidth: 800,
     defaultHeight: 500,
@@ -112,7 +112,7 @@ export const START_MENU_ITEMS: AppItem[] = [
   {
     id: 'profile',
     label: 'Profile',
-    icon: 'assets/images/logo2.png',
+    icon: 'assets/images/profile1.png',
     component: Profile,
     defaultWidth: 600,
     defaultHeight: 400,
@@ -120,7 +120,7 @@ export const START_MENU_ITEMS: AppItem[] = [
   {
     id: 'user',
     label: 'Users',
-    icon: 'assets/images/logo2.png',
+    icon: 'assets/images/user1.png',
     component: User,
     defaultWidth: 0,  // 0 = open maximized
     defaultHeight: 0,
