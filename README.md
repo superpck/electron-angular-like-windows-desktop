@@ -15,8 +15,9 @@ A desktop environment built with **Angular 21** + **Electron**, styled after a W
 | Feature | Description |
 |---------|-------------|
 | 🖥 Desktop environment | Wallpaper, desktop icons, taskbar |
-| 🪟 Floating windows | Draggable, resizable, minimize / maximize / close |
+| 🪟 Floating windows | Draggable (clamped), resizable, minimize / maximize / close |
 | 📋 Start Menu | Multi-level submenu support |
+| 🖱 Taskbar context menu | Right-click any window button → Minimize, Maximize, Close |
 | 🔔 `MyAlert` | Promise-based modal dialogs (success, info, warning, error, confirm, input) |
 | 🍞 `MyToastr` | Signal-based toast notifications with auto-dismiss & progress bar |
 | 🗂 `MyTabs` | Reusable tab component with `line` and `pill` variants |

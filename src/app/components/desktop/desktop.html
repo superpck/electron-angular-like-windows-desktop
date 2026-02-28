@@ -212,6 +212,7 @@
         class="taskbar-btn"
         [class.taskbar-btn-minimized]="win.minimized"
         (click)="toggleMinimize(win.id)"
+        (contextmenu)="openTaskbarContextMenu($event, win.id)"
         [attr.aria-pressed]="!win.minimized"
         type="button"
       >
@@ -223,3 +224,39 @@
   <!-- Clock -->
   <div class="taskbar-clock" role="timer" aria-live="off">{{ currentTime() }}</div>
 </div>
+
+<!-- Taskbar context menu -->
+@if (contextMenu()) {
+  <div class="ctx-overlay" (click)="closeContextMenu()" (contextmenu)="closeContextMenu()" aria-hidden="true"></div>
+  <ul
+    class="ctx-menu"
+    [style.left.px]="contextMenu()!.x"
+    [style.top.px]="contextMenu()!.y"
+    role="menu"
+    aria-label="Window actions"
+  >
+    @for (win of windows(); track win.id) {
+      @if (win.id === contextMenu()!.id) {
+        <li role="none">
+          <button role="menuitem" type="button" class="ctx-item" (click)="toggleMinimize(win.id); closeContextMenu()">
+            <span class="ctx-icon">&#x2212;</span>
+            {{ win.minimized ? 'Restore' : 'Minimize' }}
+          </button>
+        </li>
+        <li role="none">
+          <button role="menuitem" type="button" class="ctx-item" (click)="toggleMaximize(win.id); closeContextMenu()">
+            <span class="ctx-icon">{{ win.maximized ? '&#x2752;' : '&#x25A1;' }}</span>
+            {{ win.maximized ? 'Restore' : 'Maximize' }}
+          </button>
+        </li>
+        <li class="ctx-divider" role="separator"></li>
+        <li role="none">
+          <button role="menuitem" type="button" class="ctx-item ctx-item--danger" (click)="closeWindow(win.id); closeContextMenu()">
+            <span class="ctx-icon">&#x2715;</span>
+            Close
+          </button>
+        </li>
+      }
+    }
+  </ul>
+}

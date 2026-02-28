@@ -1,7 +1,26 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 
 const isDev = process.env['NODE_ENV'] === 'development';
+
+// Show only the app-name menu (macOS) — hide File, Edit, View, Window, Help
+// On Windows / Linux: remove the menu bar entirely
+if (process.platform === 'darwin') {
+  Menu.setApplicationMenu(
+    Menu.buildFromTemplate([
+      {
+        label: app.name,
+        submenu: [
+          { role: 'about' },
+          { type: 'separator' },
+          { role: 'quit' },
+        ],
+      },
+    ])
+  );
+} else {
+  Menu.setApplicationMenu(null);
+}
 
 function createWindow() {
   const win = new BrowserWindow({

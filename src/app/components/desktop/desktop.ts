@@ -93,6 +93,7 @@ export class Desktop {
   windows = signal<WindowState[]>([]);
   startMenuOpen = signal(false);
   currentTime = signal('');
+  contextMenu = signal<{ id: string; x: number; y: number } | null>(null);
 
   private dragState: DragState | null = null;
   private resizeState: ResizeState | null = null;
@@ -260,9 +261,20 @@ export class Desktop {
       const dx = event.clientX - this.dragState.startMouseX;
       const dy = event.clientY - this.dragState.startMouseY;
       const id = this.dragState.windowId;
-      const newX = this.dragState.startWinX + dx;
-      const newY = this.dragState.startWinY + dy;
-      this.windows.update((wins) => wins.map((w) => (w.id === id ? { ...w, x: newX, y: newY } : w)));
+      const win = this.windows().find((w) => w.id === id);
+      if (win) {
+        const TITLEBAR_H = 36;
+        const TASKBAR_H = 48;
+        const viewW = this.doc.documentElement.clientWidth;
+        const viewH = this.doc.documentElement.clientHeight;
+        const rawX = this.dragState.startWinX + dx;
+        const rawY = this.dragState.startWinY + dy;
+        // Keep at least 120 px of title bar visible horizontally
+        const newX = Math.max(-(win.width - 120), Math.min(rawX, viewW - 120));
+        // Title bar must stay within desktop (not behind taskbar, not above top)
+        const newY = Math.max(0, Math.min(rawY, viewH - TASKBAR_H - TITLEBAR_H));
+        this.windows.update((wins) => wins.map((w) => (w.id === id ? { ...w, x: newX, y: newY } : w)));
+      }
     }
     if (this.resizeState) {
       const dx = event.clientX - this.resizeState.startMouseX;
@@ -277,5 +289,14 @@ export class Desktop {
   private onDocMouseUp() {
     this.dragState = null;
     this.resizeState = null;
+  }
+
+  openTaskbarContextMenu(event: MouseEvent, id: string) {
+    event.preventDefault();
+    this.contextMenu.set({ id, x: event.clientX, y: event.clientY });
+  }
+
+  closeContextMenu() {
+    this.contextMenu.set(null);
   }
 }

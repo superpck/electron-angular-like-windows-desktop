@@ -93,6 +93,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] — 2026-03-01
+
+### Added
+
+- **Taskbar right-click context menu** — right-click any taskbar button to get a popup with Minimize/Restore, Maximize/Restore, and Close (red) actions; click outside to dismiss
+- **Electron menu bar stripped** — macOS shows only the app-name menu (About + Quit); Windows/Linux removes the menu bar entirely via `Menu.setApplicationMenu(null)`
+
+### Fixed
+
+- **Window drag clamping** — dragging a window can no longer hide its title bar: Y is clamped to `[0, viewH − taskbar − titlebar]`; X keeps at least 120 px of title bar visible at all times
+- **Copyright notice** — About window footer changed from `All rights reserved.` (incompatible with MIT) to `Released under the MIT License.` with a link to `opensource.org/licenses/MIT`
+
+---
+
 ## [Unreleased]
 
 _Nothing yet._

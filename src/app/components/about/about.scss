@@ -233,3 +233,12 @@
   width: 14px !important;
   height: 14px !important;
 }
+
+.footer-link {
+  color: #1976d2;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
