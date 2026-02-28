@@ -34,11 +34,11 @@ export class Profile {
   editing = signal(false);
 
   profile = signal<ProfileData>({
-    name: 'Alex Johnson',
+    name: 'CK Khonkaen',
     role: 'Senior Developer',
-    email: 'alex.johnson@example.com',
-    phone: '+1 (555) 012-3456',
-    location: 'San Francisco, CA',
+    email: 'ck.khonkaen@example.com',
+    phone: '+66 (007) 012-3456',
+    location: 'Khon Kaen, Thailand',
     bio: 'Passionate developer who loves building clean, performant applications and solving complex problems with elegant solutions.',
     avatar: '',
   });

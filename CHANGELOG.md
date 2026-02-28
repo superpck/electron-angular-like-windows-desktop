@@ -66,6 +66,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.0] — 2026-03-01
+
+### Added
+
+- **Profile page** — full redesign: gradient hero banner, avatar with initials fallback, stats row (Projects / Commits / Reviews), 2-column info grid with hover animations, inline edit form with draft/save/cancel signal flow
+- **GitHub Copilot credit** — dedicated section in About window (Pinterest-style logo, gradient background) and README
+- **Acknowledgements section** in README — Tailwind CSS, Angular Material, randomuser.me
+- **Docs links** — external `target="_blank"` links to Tailwind CSS Docs and Angular Material Docs added to their respective showcase windows
+- **`desktop-menu.ts` how-to comments** — step-by-step instructions for adding Desktop Icons, flat Start Menu items, and submenu groups; inline `// ↓ ADD HERE ↓` markers
+
+### Changed
+
+- **`defaultWidth: 0` / `defaultHeight: 0`** — any window configured with `0` on either dimension now opens already maximized; restores to `800×500` on un-maximize
+- **`bg-gradient-to-br` → `bg-linear-to-br`** — updated to Tailwind v4 canonical class name in `tailwind-example.html` (all 3 occurrences)
+- **README** — full rewrite: badges, feature table, project structure, quick-start guide, reusable component usage examples, desktop menu config docs, tech stack, license, acknowledgements, GitHub Copilot credit; removed Angular CLI boilerplate
+
+### Fixed
+
+- **Pagination select vertical alignment** — `mat-form-field` "Rows per page" select was misaligned vertically relative to text and icon buttons; fixed via `subscriptSizing="dynamic"`, hidden notch border, removed subscript wrapper space, and `align-items: center` on the field flex container
+
+### Documentation
+
+- **`MyAlertService`** — added JSDoc header with full usage examples: simple alerts, confirm dialog, input dialog, all options
+- **`MyToastrService`** — added JSDoc header with full usage examples: basic, custom title, custom duration, persistent toast + dismiss, clear all, low-level `show()`
+
+---
+
 ## [Unreleased]
 
 _Nothing yet._

@@ -144,18 +144,31 @@
   gap: 8px;
   font-size: 0.8rem;
   color: #666;
+  line-height: 1;
 }
 
 .page-size-select {
   width: 72px;
 
+  // Remove space reserved for floating label (top gap in outline variant)
+  ::ng-deep .mdc-notched-outline__notch {
+    border-top: 1px solid !important;
+  }
   ::ng-deep .mat-mdc-form-field-infix {
     padding-top: 6px !important;
     padding-bottom: 6px !important;
-    min-height: unset;
+    min-height: unset !important;
   }
   ::ng-deep .mat-mdc-text-field-wrapper {
     padding: 0 8px;
+  }
+  // Remove bottom space reserved for hint / error messages
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+  // Override the internal top-margin that offsets for the label
+  ::ng-deep .mat-mdc-form-field-flex {
+    align-items: center;
   }
 }
 

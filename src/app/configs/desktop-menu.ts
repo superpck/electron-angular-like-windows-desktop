@@ -49,15 +49,15 @@ export interface AppItem {
 export const DESKTOP_ICONS: AppItem[] = [
   {
     id: 'profile',
-    label: 'Profile',
+    label: 'My Profile',
     icon: 'assets/images/profile1.png',
     component: Profile,
-    defaultWidth: 600,
-    defaultHeight: 400,
+    defaultWidth: 500,
+    defaultHeight: 600,
   },
   {
     id: 'user',
-    label: 'Users',
+    label: 'User List',
     icon: 'assets/images/user1.png',
     component: User,
     defaultWidth: 0,  // 0 = open maximized
@@ -114,12 +114,12 @@ export const START_MENU_ITEMS: AppItem[] = [
     label: 'Profile',
     icon: 'assets/images/profile1.png',
     component: Profile,
-    defaultWidth: 600,
-    defaultHeight: 400,
+    defaultWidth: 500,
+    defaultHeight: 600,
   },
   {
     id: 'user',
-    label: 'Users',
+    label: 'Users List',
     icon: 'assets/images/user1.png',
     component: User,
     defaultWidth: 0,  // 0 = open maximized

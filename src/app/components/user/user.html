@@ -96,7 +96,7 @@
     <div class="pagination-bar" aria-label="Pagination">
       <div class="pagination-size">
         <span>Rows per page:</span>
-        <mat-form-field appearance="outline" class="page-size-select">
+        <mat-form-field appearance="outline" class="page-size-select" subscriptSizing="dynamic">
           <mat-select
             [value]="pageSize()"
             (valueChange)="onPageSizeChange($event)"
