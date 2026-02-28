@@ -1,12 +1,83 @@
 {
-  "name": "angular-desktop",
-  "version": "0.0.0",
+  "name": "electron-angular",
+  "version": "1.0.0",
+  "main": "electron/main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4404 -o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron:serve": "concurrently \"ng serve\" \"wait-on http://localhost:4404 && NODE_ENV=development electron .\"",
+    "electron:build": "ng build --base-href ./ && electron .",
+    "build:macos": "rm -rf release dist && ng build --base-href ./ && electron-builder --mac",
+    "build:windows": "rm -rf release dist && ng build --base-href ./ && electron-builder --win",
+    "build:linux": "rm -rf release dist && ng build --base-href ./ && electron-builder --linux",
+    "build:all": "rm -rf release dist && ng build --base-href ./ && electron-builder --mac --win --linux"
+  },
+  "build": {
+    "appId": "com.electron-angular.app",
+    "productName": "Electron Angular",
+    "icon": "public/assets/images/logo1.png",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "dist/angular-desktop/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.utilities",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Utility"
+    }
   },
   "prettier": {
     "printWidth": 100,
@@ -21,26 +92,35 @@
     ]
   },
   "private": true,
-  "packageManager": "npm@11.10.1",
+  "packageManager": "npm@11.11.0",
   "dependencies": {
-    "@angular/common": "^21.0.0",
-    "@angular/compiler": "^21.0.0",
-    "@angular/core": "^21.0.0",
-    "@angular/forms": "^21.0.0",
-    "@angular/platform-browser": "^21.0.0",
-    "@angular/router": "^21.0.0",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "@angular/animations": "^21.2.0",
+    "@angular/cdk": "~21.2.0",
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/material": "~21.2.0",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "dayjs": "^1.11.19",
+    "rxjs": "~7.8.2",
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@angular/build": "^21.0.3",
-    "@angular/cli": "^21.0.3",
-    "@angular/compiler-cli": "^21.0.0",
-    "@tailwindcss/postcss": "^4.1.12",
-    "jsdom": "^27.1.0",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.12",
-    "typescript": "~5.9.2",
-    "vitest": "^4.0.8"
+    "@angular/build": "^21.2.0",
+    "@angular/cli": "^21.2.0",
+    "@angular/compiler-cli": "^21.2.0",
+    "@angular/material": "^21.2.0",
+    "@tailwindcss/postcss": "^4.2.1",
+    "concurrently": "^9.2.1",
+    "electron": "^40.6.1",
+    "electron-builder": "^26.8.1",
+    "jsdom": "^28.1.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.2.1",
+    "typescript": "~5.9.3",
+    "vitest": "^4.0.18",
+    "wait-on": "^9.0.4"
   }
 }

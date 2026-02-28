@@ -1,0 +1,320 @@
+<div class="mat-example">
+
+  <!-- ── Docs link ──────────────────────────────── -->
+  <div class="docs-link-bar">
+    <a href="https://material.angular.io/components/categories" target="_blank" rel="noopener noreferrer" class="docs-link">
+      <svg class="docs-link-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+      </svg>
+      Angular Material Docs
+    </a>
+  </div>
+
+  <app-my-tabs variant="line">
+
+    <!-- ── Tab 1: Buttons & Indicators ──────────── -->
+    <app-my-tab title="Buttons & Chips" icon="smart_button">
+      <div class="section">
+
+        <h3 class="section-title">Buttons</h3>
+        <div class="row wrap">
+          <button mat-flat-button color="primary">Primary</button>
+          <button mat-flat-button color="accent">Accent</button>
+          <button mat-flat-button color="warn">Warn</button>
+          <button mat-stroked-button color="primary">Outlined</button>
+          <button mat-button color="primary">Text</button>
+          <button mat-icon-button color="primary" matTooltip="Settings" aria-label="Settings">
+            <mat-icon>settings</mat-icon>
+          </button>
+          <button mat-fab color="primary" aria-label="Add">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" aria-label="Edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-flat-button color="primary" disabled>Disabled</button>
+        </div>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Badge</h3>
+        <div class="row wrap gap-xl">
+          <button mat-icon-button [matBadge]="5" matBadgeColor="warn" aria-label="Notifications">
+            <mat-icon>notifications</mat-icon>
+          </button>
+          <button mat-icon-button [matBadge]="99" matBadgeColor="primary" aria-label="Mail">
+            <mat-icon>mail</mat-icon>
+          </button>
+          <span matBadge="NEW" matBadgeColor="accent" class="badge-demo">Label with Badge</span>
+        </div>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Chips</h3>
+        <mat-chip-set aria-label="Tags">
+          @for (chip of chips(); track chip) {
+            <mat-chip (removed)="removeChip(chip)" [removable]="true">
+              {{ chip }}
+              <button matChipRemove aria-label="Remove {{ chip }}">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          }
+        </mat-chip-set>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Progress</h3>
+        <div class="progress-list">
+          <div class="progress-row">
+            <span class="progress-label">Determinate ({{ progressValue() }}%)</span>
+            <mat-progress-bar mode="determinate" [value]="progressValue()" />
+          </div>
+          <div class="progress-row">
+            <span class="progress-label">Buffer</span>
+            <mat-progress-bar mode="buffer" value="40" bufferValue="70" />
+          </div>
+          <div class="progress-row">
+            <span class="progress-label">Indeterminate</span>
+            <mat-progress-bar mode="indeterminate" />
+          </div>
+        </div>
+        <div class="row wrap gap-xl" style="margin-top:12px">
+          <mat-progress-spinner mode="determinate" [value]="progressValue()" diameter="52" />
+          <mat-progress-spinner mode="indeterminate" diameter="52" />
+        </div>
+
+      </div>
+    </app-my-tab>
+
+    <!-- ── Tab 2: Forms ──────────────────────────── -->
+    <app-my-tab title="Forms" icon="edit_note">
+      <div class="section">
+        <form [formGroup]="form" class="form-grid">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="name" placeholder="e.g. John Doe" />
+            <mat-icon matPrefix>person</mat-icon>
+            @if (form.controls.name.invalid && form.controls.name.touched) {
+              <mat-error>Name is required</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="e.g. john@example.com" />
+            <mat-icon matPrefix>email</mat-icon>
+            @if (form.controls.email.errors?.['required'] && form.controls.email.touched) {
+              <mat-error>Email is required</mat-error>
+            }
+            @if (form.controls.email.errors?.['email'] && form.controls.email.touched) {
+              <mat-error>Invalid email address</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="role">
+              @for (role of roles; track role) {
+                <mat-option [value]="role">{{ role }}</mat-option>
+              }
+            </mat-select>
+            <mat-icon matPrefix>badge</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Fill Variant</mat-label>
+            <input matInput placeholder="Filled style input" />
+            <mat-hint>Hint text below the field</mat-hint>
+          </mat-form-field>
+
+        </form>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Checkbox, Radio &amp; Toggle</h3>
+        <div class="row wrap gap-xl">
+          <mat-checkbox [formControl]="form.controls.agree" color="primary">Accept terms &amp; conditions</mat-checkbox>
+          <mat-checkbox [checked]="false" color="primary">Unchecked</mat-checkbox>
+          <mat-checkbox [checked]="true" [indeterminate]="false" color="warn">Warn colour</mat-checkbox>
+        </div>
+        <mat-radio-group [formControl]="form.controls.color" class="radio-group" aria-label="Favourite colour">
+          <mat-radio-button value="blue">Blue</mat-radio-button>
+          <mat-radio-button value="green">Green</mat-radio-button>
+          <mat-radio-button value="red">Red</mat-radio-button>
+        </mat-radio-group>
+        <div class="row wrap gap-xl" style="margin-top:8px">
+          <mat-slide-toggle [formControl]="form.controls.notifications" color="primary">Notifications</mat-slide-toggle>
+          <mat-slide-toggle [checked]="false">Disabled-like</mat-slide-toggle>
+        </div>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Slider</h3>
+        <mat-slider min="0" max="100" step="1" showTickMarks discrete class="full-width" aria-label="Volume">
+          <input matSliderThumb [formControl]="form.controls.volume" />
+        </mat-slider>
+        <p class="hint-text">Volume: {{ form.controls.volume.value }}</p>
+
+      </div>
+    </app-my-tab>
+
+    <!-- ── Tab 3: Cards, Lists, Table ────────────── -->
+    <app-my-tab title="Cards & Table" icon="table_chart">
+      <div class="section">
+
+        <h3 class="section-title">Cards</h3>
+        <div class="card-row">
+          <mat-card appearance="outlined">
+            <mat-card-header>
+              <mat-icon mat-card-avatar class="avatar-icon">account_circle</mat-icon>
+              <mat-card-title>Alice Johnson</mat-card-title>
+              <mat-card-subtitle>Administrator</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>This is a Material card with avatar, title, subtitle and action buttons.</p>
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-button color="primary">VIEW</button>
+              <button mat-button color="warn">DELETE</button>
+            </mat-card-actions>
+          </mat-card>
+
+          <mat-card class="stats-card">
+            <mat-card-content>
+              <div class="stats-row">
+                <mat-icon class="stats-icon primary">people</mat-icon>
+                <div>
+                  <p class="stats-value">1,284</p>
+                  <p class="stats-label">Total Users</p>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card class="stats-card">
+            <mat-card-content>
+              <div class="stats-row">
+                <mat-icon class="stats-icon accent">trending_up</mat-icon>
+                <div>
+                  <p class="stats-value">+12.5%</p>
+                  <p class="stats-label">Growth</p>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">List</h3>
+        <mat-list class="demo-list">
+          <mat-list-item>
+            <mat-icon matListItemIcon>folder</mat-icon>
+            <span matListItemTitle>Documents</span>
+            <span matListItemLine>12 files</span>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListItemIcon>photo</mat-icon>
+            <span matListItemTitle>Photos</span>
+            <span matListItemLine>84 files</span>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListItemIcon>music_note</mat-icon>
+            <span matListItemTitle>Music</span>
+            <span matListItemLine>320 files</span>
+          </mat-list-item>
+        </mat-list>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Table</h3>
+        <div class="table-wrap">
+          <table mat-table [dataSource]="tableData" matSort class="demo-table">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+              <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+              <td mat-cell *matCellDef="let row">{{ row.role }}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let row">
+                <span class="status-chip" [class]="'status-' + row.status.toLowerCase()">{{ row.status }}</span>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+          </table>
+        </div>
+
+      </div>
+    </app-my-tab>
+
+    <!-- ── Tab 4: Expansion & Stepper ────────────── -->
+    <app-my-tab title="Panels" icon="view_agenda">
+      <div class="section">
+
+        <h3 class="section-title">Expansion Panels (Accordion)</h3>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon class="panel-icon">info</mat-icon> General Info
+              </mat-panel-title>
+              <mat-panel-description>Basic information</mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>This is the content of the first panel. You can put any content here including forms, lists, or tables.</p>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon class="panel-icon">security</mat-icon> Security
+              </mat-panel-title>
+              <mat-panel-description>Password &amp; 2FA settings</mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>Manage your security preferences, change password, and configure two-factor authentication here.</p>
+          </mat-expansion-panel>
+          <mat-expansion-panel disabled>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <mat-icon class="panel-icon">lock</mat-icon> Billing (Disabled)
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Stepper</h3>
+        <mat-stepper orientation="horizontal" class="demo-stepper">
+          <mat-step label="Account">
+            <p class="step-content">Set up your account credentials.</p>
+            <div class="step-actions">
+              <button mat-flat-button color="primary" matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Profile">
+            <p class="step-content">Fill in your profile information.</p>
+            <div class="step-actions">
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-flat-button color="primary" matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Confirm">
+            <p class="step-content">Review and confirm your details.</p>
+            <div class="step-actions">
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-flat-button color="primary">Submit</button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+
+      </div>
+    </app-my-tab>
+
+  </app-my-tabs>
+</div>

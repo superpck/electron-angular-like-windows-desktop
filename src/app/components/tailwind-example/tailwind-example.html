@@ -1,0 +1,275 @@
+<div class="overflow-auto h-full px-6 py-5 bg-gray-50">
+
+  <!-- ── Docs link ─────────────────────────────── -->
+  <div class="flex justify-end mb-4">
+    <a href="https://tailwindcss.com/docs" target="_blank" rel="noopener noreferrer"
+       class="inline-flex items-center gap-1.5 text-xs font-medium text-indigo-600 hover:text-indigo-800 hover:underline">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+      </svg>
+      Tailwind CSS Docs
+    </a>
+  </div>
+
+  <!-- ── Typography ───────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Typography</h2>
+    <div class="bg-white rounded-xl shadow-sm p-5 space-y-2">
+      <p class="text-4xl font-black text-gray-900">Heading 1 — Black</p>
+      <p class="text-2xl font-bold text-gray-800">Heading 2 — Bold</p>
+      <p class="text-xl font-semibold text-gray-700">Heading 3 — Semibold</p>
+      <p class="text-base text-gray-600">Body text — Regular. The quick brown fox jumps over the lazy dog.</p>
+      <p class="text-sm text-gray-500">Small text — Muted helper copy.</p>
+      <p class="text-xs font-mono text-indigo-500">Monospace code snippet: const x = 42;</p>
+    </div>
+  </section>
+
+  <!-- ── Colours ───────────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Colour Palette</h2>
+    <div class="bg-white rounded-xl shadow-sm p-5">
+      <div class="flex flex-wrap gap-2">
+        <div class="w-10 h-10 rounded-lg bg-slate-500"   title="slate-500"></div>
+        <div class="w-10 h-10 rounded-lg bg-red-500"     title="red-500"></div>
+        <div class="w-10 h-10 rounded-lg bg-orange-500"  title="orange-500"></div>
+        <div class="w-10 h-10 rounded-lg bg-amber-400"   title="amber-400"></div>
+        <div class="w-10 h-10 rounded-lg bg-yellow-400"  title="yellow-400"></div>
+        <div class="w-10 h-10 rounded-lg bg-lime-500"    title="lime-500"></div>
+        <div class="w-10 h-10 rounded-lg bg-green-500"   title="green-500"></div>
+        <div class="w-10 h-10 rounded-lg bg-teal-500"    title="teal-500"></div>
+        <div class="w-10 h-10 rounded-lg bg-cyan-500"    title="cyan-500"></div>
+        <div class="w-10 h-10 rounded-lg bg-blue-600"    title="blue-600"></div>
+        <div class="w-10 h-10 rounded-lg bg-indigo-600"  title="indigo-600"></div>
+        <div class="w-10 h-10 rounded-lg bg-violet-600"  title="violet-600"></div>
+        <div class="w-10 h-10 rounded-lg bg-purple-600"  title="purple-600"></div>
+        <div class="w-10 h-10 rounded-lg bg-pink-500"    title="pink-500"></div>
+        <div class="w-10 h-10 rounded-lg bg-rose-500"    title="rose-500"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Buttons ───────────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Buttons</h2>
+    <div class="bg-white rounded-xl shadow-sm p-5 space-y-3">
+      <div class="flex flex-wrap gap-3 items-center">
+        <button class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 active:scale-95 transition-all">Primary</button>
+        <button class="px-4 py-2 bg-gray-800 text-white text-sm font-semibold rounded-lg hover:bg-gray-900 active:scale-95 transition-all">Dark</button>
+        <button class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-lg hover:bg-green-700 active:scale-95 transition-all">Success</button>
+        <button class="px-4 py-2 bg-red-600 text-white text-sm font-semibold rounded-lg hover:bg-red-700 active:scale-95 transition-all">Danger</button>
+        <button class="px-4 py-2 bg-amber-400 text-white text-sm font-semibold rounded-lg hover:bg-amber-500 active:scale-95 transition-all">Warning</button>
+      </div>
+      <div class="flex flex-wrap gap-3 items-center">
+        <button class="px-4 py-2 border border-blue-600 text-blue-600 text-sm font-semibold rounded-lg hover:bg-blue-50 transition-all">Outlined</button>
+        <button class="px-4 py-2 text-blue-600 text-sm font-semibold rounded-lg hover:bg-blue-50 transition-all">Ghost</button>
+        <button class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-full hover:bg-blue-700 transition-all">Pill</button>
+        <button disabled class="px-4 py-2 bg-gray-200 text-gray-400 text-sm font-semibold rounded-lg cursor-not-allowed">Disabled</button>
+        <button class="px-3 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700 transition-all flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          With Icon
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Badges ────────────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Badges</h2>
+    <div class="bg-white rounded-xl shadow-sm p-5 flex flex-wrap gap-2 items-center">
+      <span class="px-2.5 py-0.5 text-xs font-semibold bg-blue-100 text-blue-700 rounded-full">Default</span>
+      <span class="px-2.5 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full">Success</span>
+      <span class="px-2.5 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded-full">Error</span>
+      <span class="px-2.5 py-0.5 text-xs font-semibold bg-amber-100 text-amber-700 rounded-full">Warning</span>
+      <span class="px-2.5 py-0.5 text-xs font-semibold bg-gray-100 text-gray-600 rounded-full">Neutral</span>
+      <span class="px-2.5 py-0.5 text-xs font-semibold bg-purple-100 text-purple-700 rounded-full">Premium</span>
+      <span class="inline-flex items-center gap-1 px-2.5 py-0.5 text-xs font-semibold bg-blue-600 text-white rounded-full">
+        <span class="w-1.5 h-1.5 bg-white rounded-full"></span> Live
+      </span>
+    </div>
+  </section>
+
+  <!-- ── Alerts ────────────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Alerts / Banners</h2>
+    <div class="bg-white rounded-xl shadow-sm p-5 space-y-3">
+      <div class="flex items-start gap-3 p-4 bg-green-50 border border-green-200 rounded-lg">
+        <svg class="w-5 h-5 text-green-600 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <p class="text-sm text-green-800 font-medium">Operation completed successfully!</p>
+      </div>
+      <div class="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <svg class="w-5 h-5 text-blue-600 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>
+        <p class="text-sm text-blue-800 font-medium">Here is some useful information for you.</p>
+      </div>
+      <div class="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+        <svg class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+        <p class="text-sm text-amber-800 font-medium">Please review your settings before continuing.</p>
+      </div>
+      <div class="flex items-start gap-3 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <svg class="w-5 h-5 text-red-600 shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>
+        <p class="text-sm text-red-800 font-medium">Failed to save. Please try again.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Cards ─────────────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Cards</h2>
+    <div class="grid grid-cols-3 gap-4">
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+        <div class="h-24 bg-linear-to-br from-blue-500 to-indigo-600"></div>
+        <div class="p-4">
+          <h3 class="font-bold text-gray-800 text-sm">Card Title</h3>
+          <p class="text-xs text-gray-500 mt-1">Brief description of the card content goes here.</p>
+          <button class="mt-3 text-xs font-semibold text-blue-600 hover:underline">Read more →</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-full bg-linear-to-br from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold text-sm">JD</div>
+          <div>
+            <p class="text-sm font-semibold text-gray-800">John Doe</p>
+            <p class="text-xs text-gray-500">Administrator</p>
+          </div>
+        </div>
+        <p class="text-xs text-gray-600">Profile card with avatar and role badge example.</p>
+      </div>
+      <div class="bg-linear-to-br from-indigo-600 to-purple-600 rounded-xl p-4 text-white">
+        <p class="text-xs font-semibold opacity-75 uppercase tracking-wide">Total Revenue</p>
+        <p class="text-3xl font-black mt-1">฿84,250</p>
+        <p class="text-xs mt-2 opacity-75">↑ 12.5% from last month</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Form Inputs ───────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Form Inputs</h2>
+    <div class="bg-white rounded-xl shadow-sm p-5 grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Text Input</label>
+        <input type="text" placeholder="Enter value..." class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Select</label>
+        <select class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+          <option>Option A</option>
+          <option>Option B</option>
+          <option>Option C</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Error State</label>
+        <input type="text" value="invalid@" class="w-full px-3 py-2 text-sm border border-red-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 bg-red-50" />
+        <p class="text-xs text-red-500 mt-1">Please enter a valid email address.</p>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Disabled</label>
+        <input type="text" value="Read only value" disabled class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg bg-gray-100 text-gray-400 cursor-not-allowed" />
+      </div>
+      <div class="col-span-2 flex flex-wrap gap-4 items-center">
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" class="w-4 h-4 accent-blue-600" checked />
+          <span class="text-sm text-gray-700">Checkbox checked</span>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" class="w-4 h-4 accent-blue-600" />
+          <span class="text-sm text-gray-700">Checkbox unchecked</span>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="radio" name="r" class="w-4 h-4 accent-blue-600" checked />
+          <span class="text-sm text-gray-700">Radio A</span>
+        </label>
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="radio" name="r" class="w-4 h-4 accent-blue-600" />
+          <span class="text-sm text-gray-700">Radio B</span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Table ─────────────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Table</h2>
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 border-b border-gray-200">
+          <tr>
+            <th class="text-left px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide">Name</th>
+            <th class="text-left px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide">Role</th>
+            <th class="text-left px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide">Status</th>
+            <th class="text-right px-4 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          <tr class="hover:bg-gray-50 transition-colors">
+            <td class="px-4 py-3 font-medium text-gray-900">Alice Johnson</td>
+            <td class="px-4 py-3 text-gray-600">Admin</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 text-xs font-semibold bg-green-100 text-green-700 rounded-full">Active</span></td>
+            <td class="px-4 py-3 text-right"><button class="text-xs text-blue-600 hover:underline">Edit</button></td>
+          </tr>
+          <tr class="hover:bg-gray-50 transition-colors">
+            <td class="px-4 py-3 font-medium text-gray-900">Bob Smith</td>
+            <td class="px-4 py-3 text-gray-600">Editor</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 text-xs font-semibold bg-amber-100 text-amber-700 rounded-full">Pending</span></td>
+            <td class="px-4 py-3 text-right"><button class="text-xs text-blue-600 hover:underline">Edit</button></td>
+          </tr>
+          <tr class="hover:bg-gray-50 transition-colors">
+            <td class="px-4 py-3 font-medium text-gray-900">Carol White</td>
+            <td class="px-4 py-3 text-gray-600">Viewer</td>
+            <td class="px-4 py-3"><span class="px-2 py-0.5 text-xs font-semibold bg-gray-100 text-gray-600 rounded-full">Inactive</span></td>
+            <td class="px-4 py-3 text-right"><button class="text-xs text-blue-600 hover:underline">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── Progress ──────────────────────────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Progress Bars</h2>
+    <div class="bg-white rounded-xl shadow-sm p-5 space-y-4">
+      <div>
+        <div class="flex justify-between text-xs text-gray-600 mb-1"><span>Storage</span><span>{{ progress }}%</span></div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div class="h-full bg-blue-600 rounded-full transition-all" [style.width]="progress + '%'"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs text-gray-600 mb-1"><span>CPU</span><span>30%</span></div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div class="h-full bg-green-500 rounded-full" style="width:30%"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs text-gray-600 mb-1"><span>Memory</span><span>88%</span></div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div class="h-full bg-red-500 rounded-full" style="width:88%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Avatar group + Tooltip-like ──────────── -->
+  <section class="mb-8">
+    <h2 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-3">Avatars &amp; Stacks</h2>
+    <div class="bg-white rounded-xl shadow-sm p-5 flex flex-wrap items-center gap-6">
+      <!-- Stacked avatars -->
+      <div class="flex -space-x-3">
+        <div class="w-9 h-9 rounded-full bg-blue-500   ring-2 ring-white flex items-center justify-center text-white text-xs font-bold">A</div>
+        <div class="w-9 h-9 rounded-full bg-green-500  ring-2 ring-white flex items-center justify-center text-white text-xs font-bold">B</div>
+        <div class="w-9 h-9 rounded-full bg-purple-500 ring-2 ring-white flex items-center justify-center text-white text-xs font-bold">C</div>
+        <div class="w-9 h-9 rounded-full bg-pink-500   ring-2 ring-white flex items-center justify-center text-white text-xs font-bold">D</div>
+        <div class="w-9 h-9 rounded-full bg-gray-300   ring-2 ring-white flex items-center justify-center text-gray-600 text-xs font-bold">+8</div>
+      </div>
+      <!-- Sizes -->
+      <div class="flex items-end gap-2">
+        <div class="w-6 h-6 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs">XS</div>
+        <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs">SM</div>
+        <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center text-white text-sm">MD</div>
+        <div class="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center text-white text-sm">LG</div>
+        <div class="w-16 h-16 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold">XL</div>
+      </div>
+    </div>
+  </section>
+
+</div>

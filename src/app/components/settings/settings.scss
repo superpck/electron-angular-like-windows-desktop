@@ -1,0 +1,126 @@
+.settings-container {
+  padding: 24px;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #333;
+  background: #fff;
+}
+
+.settings-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+/* Color Preview */
+.color-preview {
+  width: 100%;
+  height: 64px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  transition: background 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-preview-text {
+  font-size: 14px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+/* Preset Color Dot */
+.preset-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* Custom Color Row */
+.custom-color-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.custom-color-label {
+  font-size: 14px;
+  color: #555;
+  flex-shrink: 0;
+}
+
+.color-picker-input {
+  width: 48px;
+  height: 36px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  padding: 2px;
+  cursor: pointer;
+  background: none;
+}
+
+.color-picker-input:focus-visible {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
+
+.color-hex-label {
+  font-size: 13px;
+  font-family: monospace;
+  color: #777;
+}
+
+/* Full width select */
+.w-full {
+  width: 100%;
+}
+
+/* Ensure mat-select dropdown panel has white background */
+::ng-deep .mat-mdc-select-panel {
+  background-color: #fff !important;
+}
+
+::ng-deep .mat-mdc-option {
+  background-color: #fff;
+
+  &:hover,
+  &.mat-mdc-option-active {
+    background-color: #f5f5f5 !important;
+  }
+}
+
+/* Actions */
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 4px;
+}

@@ -1,0 +1,161 @@
+<div class="user-container">
+  <!-- Toolbar -->
+  <div class="user-toolbar">
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-label>Search users</mat-label>
+      <input
+        matInput
+        [ngModel]="search()"
+        (ngModelChange)="onSearch($event)"
+        placeholder="Name, email, country…"
+        aria-label="Search users"
+      />
+      <mat-icon matPrefix aria-hidden="true">search</mat-icon>
+    </mat-form-field>
+    <span class="user-count" aria-live="polite">
+      {{ filteredUsers().length }} / {{ totalUsers() }} users
+    </span>
+  </div>
+
+  <!-- Loading -->
+  @if (loading()) {
+    <div class="user-status" aria-busy="true">Loading users…</div>
+  }
+
+  <!-- Error -->
+  @if (error()) {
+    <div class="user-status user-error" role="alert">{{ error() }}</div>
+  }
+
+  <!-- Table -->
+  @if (!loading() && !error()) {
+    <div class="user-table-wrap" role="region" aria-label="User list">
+      <table class="user-table" aria-label="Users">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Country</th>
+            <th scope="col">Age</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of pagedUsers(); track user.login.uuid) {
+            <tr class="user-row">
+              <td class="user-avatar-cell">
+                <img
+                  [src]="user.picture.thumbnail"
+                  [alt]="fullName(user)"
+                  class="user-avatar"
+                  width="36"
+                  height="36"
+                />
+              </td>
+              <td>
+                <span class="user-name">{{ fullName(user) }}</span>
+                <span class="user-username">{{ user.login.username }}</span>
+              </td>
+              <td class="user-email">{{ user.email }}</td>
+              <td>{{ user.location.country }}</td>
+              <td>{{ user.dob.age }}</td>
+              <td class="user-actions">
+                <button
+                  mat-icon-button
+                  (click)="editUser(user)"
+                  [attr.aria-label]="'Edit ' + fullName(user)"
+                  title="Edit"
+                  type="button"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  (click)="deleteUser(user)"
+                  [attr.aria-label]="'Delete ' + fullName(user)"
+                  title="Delete"
+                  type="button"
+                  class="btn-delete"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          }
+          @empty {
+            <tr>
+              <td colspan="6" class="user-empty">No users found</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination bar -->
+    <div class="pagination-bar" aria-label="Pagination">
+      <div class="pagination-size">
+        <span>Rows per page:</span>
+        <mat-form-field appearance="outline" class="page-size-select">
+          <mat-select
+            [value]="pageSize()"
+            (valueChange)="onPageSizeChange($event)"
+            aria-label="Rows per page"
+          >
+            @for (opt of pageSizeOptions; track opt) {
+              <mat-option [value]="opt">{{ opt }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <span class="pagination-info" aria-live="polite">
+        {{ pageStart() }}–{{ pageEnd() }} of {{ filteredUsers().length }}
+      </span>
+
+      <div class="pagination-controls">
+        <button
+          mat-icon-button
+          (click)="goToPage(0)"
+          [disabled]="currentPage() === 0"
+          aria-label="First page"
+          title="First page"
+          type="button"
+        >
+          <mat-icon>first_page</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="prevPage()"
+          [disabled]="currentPage() === 0"
+          aria-label="Previous page"
+          title="Previous page"
+          type="button"
+        >
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <span class="pagination-page">{{ currentPage() + 1 }} / {{ totalPages() }}</span>
+        <button
+          mat-icon-button
+          (click)="nextPage()"
+          [disabled]="currentPage() >= totalPages() - 1"
+          aria-label="Next page"
+          title="Next page"
+          type="button"
+        >
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="goToPage(totalPages() - 1)"
+          [disabled]="currentPage() >= totalPages() - 1"
+          aria-label="Last page"
+          title="Last page"
+          type="button"
+        >
+          <mat-icon>last_page</mat-icon>
+        </button>
+      </div>
+    </div>
+  }
+</div>

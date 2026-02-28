@@ -1,0 +1,83 @@
+/* Type-based accent colours */
+$colors: (
+  success: #2e7d32,
+  info: #1565c0,
+  warning: #e65100,
+  error: #c62828,
+  confirm: #4527a0,
+  input: #00695c,
+);
+
+.alert-dialog {
+  background: #fff;
+  color: #222;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Header */
+.alert-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.alert-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.alert-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0;
+  /* override mat-dialog-title margin */
+  &::before { display: none; }
+}
+
+/* Apply accent colour per type */
+@each $type, $color in $colors {
+  .alert-type-#{$type} {
+    .alert-header {
+      border-left: 4px solid $color;
+    }
+    .alert-icon {
+      color: $color;
+    }
+    .alert-confirm-btn {
+      background-color: $color;
+      color: #fff;
+    }
+  }
+}
+
+/* Body */
+.alert-body {
+  padding: 16px 24px !important;
+  max-height: 300px;
+}
+
+.alert-message {
+  margin: 0 0 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;
+  white-space: pre-wrap;
+}
+
+.alert-input-field {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Actions */
+.alert-actions {
+  padding: 8px 16px 16px !important;
+  justify-content: flex-end !important;
+  gap: 8px;
+}

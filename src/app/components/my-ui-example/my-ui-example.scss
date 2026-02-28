@@ -1,0 +1,95 @@
+.ui-example {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+}
+
+/* ── Section ─────────────────────────────────── */
+.section {
+  padding: 20px 24px;
+  overflow-y: auto;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.section-title {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.section-desc {
+  margin: 0 0 14px;
+  font-size: 0.83rem;
+  color: #666;
+}
+
+/* ── Button row ──────────────────────────────── */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* ── Colour overrides for flat buttons ───────── */
+.btn-success { background: #2e7d32 !important; color: #fff !important; }
+.btn-info    { background: #1565c0 !important; color: #fff !important; }
+.btn-warning { background: #e65100 !important; color: #fff !important; }
+.btn-error   { background: #c62828 !important; color: #fff !important; }
+.btn-confirm { background: #4527a0 !important; color: #fff !important; }
+.btn-input   { background: #00695c !important; color: #fff !important; }
+
+button[mat-flat-button], button[mat-stroked-button] {
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+}
+
+/* ── Divider ─────────────────────────────────── */
+.divider {
+  margin: 20px 0 !important;
+}
+
+/* ── Nested tab demos ────────────────────────── */
+.demo-tabs-wrap {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 120px;
+}
+
+.demo-content {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* ── Code block ──────────────────────────────── */
+.code-block {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 8px;
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+  border-left: 3px solid #89b4fa;
+
+  code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+}

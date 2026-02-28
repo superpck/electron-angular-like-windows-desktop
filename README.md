@@ -1,8 +1,173 @@
-# AngularDesktop
+# Electron Angular — Windows-like Desktop
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.3.
+A desktop environment built with **Angular 21** + **Electron**, styled after a Windows-like UI with floating draggable windows, a taskbar, a Start Menu with submenus, and a suite of reusable UI components.
 
-## Development server
+[![Angular](https://img.shields.io/badge/Angular-21-red?logo=angular)](https://angular.io)
+[![Electron](https://img.shields.io/badge/Electron-latest-47848F?logo=electron)](https://electronjs.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss)](https://tailwindcss.com)
+[![Angular Material](https://img.shields.io/badge/Angular_Material-21-757de8?logo=angular)](https://material.angular.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🖥 Desktop environment | Wallpaper, desktop icons, taskbar |
+| 🪟 Floating windows | Draggable, resizable, minimize / maximize / close |
+| 📋 Start Menu | Multi-level submenu support |
+| 🔔 `MyAlert` | Promise-based modal dialogs (success, info, warning, error, confirm, input) |
+| 🍞 `MyToastr` | Signal-based toast notifications with auto-dismiss & progress bar |
+| 🗂 `MyTabs` | Reusable tab component with `line` and `pill` variants |
+| 🎨 Tailwind showcase | Live demo of Tailwind CSS v4 utilities |
+| 🧱 Material showcase | Live demo of Angular Material v21 components |
+| 👤 Profile | Modern profile page with editable fields |
+| 👥 User management | User list window |
+| 🔑 Auth | Login page with route guards |
+
+---
+
+## 🗂 Project Structure
+
+```
+src/
+├── app/
+│   ├── configs/            # Desktop menu & app items config
+│   ├── components/
+│   │   ├── desktop/        # Desktop, taskbar, window manager
+│   │   ├── profile/        # User profile
+│   │   ├── user/           # User management
+│   │   ├── about/          # About window
+│   │   ├── my-ui-example/  # my-alert / my-toastr / my-tabs demo
+│   │   ├── tailwind-example/
+│   │   └── material-example/
+│   └── shares/
+│       ├── my-alert/       # Reusable alert/confirm/input dialog
+│       ├── my-toastr/      # Reusable toast notification
+│       └── my-tabs/        # Reusable tab component
+└── main.ts
+electron/
+└── main.js                 # Electron entry point
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js ≥ 18
+- npm ≥ 9
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run in browser (Angular dev server)
+
+```bash
+npm start
+# or
+npx ng serve
+```
+
+Open `http://localhost:4404/`
+
+### Run as Electron app
+
+```bash
+npm run electron
+```
+
+### Build Angular only
+
+```bash
+npx ng build
+```
+
+### Build & package Electron (macOS)
+
+```bash
+npm run build:macos
+```
+
+---
+
+## 🧩 Reusable Components
+
+### `MyAlertService`
+
+```typescript
+private alert = inject(MyAlertService);
+
+await this.alert.success('Saved!');
+await this.alert.error('Failed!');
+const ok   = await this.alert.confirm('Delete?');
+const name = await this.alert.input('Enter name:');
+```
+
+### `MyToastrService`
+
+```typescript
+private toastr = inject(MyToastrService);
+
+this.toastr.success('Record saved!');
+this.toastr.error('Request failed.');
+const id = this.toastr.info('Loading...', { duration: 0 });
+this.toastr.dismiss(id);
+```
+
+### `MyTabsModule`
+
+```typescript
+imports: [...MyTabsModule]
+```
+
+```html
+<app-my-tabs variant="line" (tabChange)="onTab($event)">
+  <app-my-tab title="General" icon="settings">...</app-my-tab>
+  <app-my-tab title="Users"   icon="people">...</app-my-tab>
+</app-my-tabs>
+```
+
+---
+
+## 🖼 Desktop Menu Config
+
+Add windows by editing `src/app/configs/desktop-menu.ts`:
+
+```typescript
+{
+  id: 'my-app',
+  label: 'My App',
+  icon: 'assets/images/logo1.png',
+  component: MyApp,
+  defaultWidth: 800,   // 0 = open maximized
+  defaultHeight: 600,
+}
+```
+
+> Setting `defaultWidth: 0` **or** `defaultHeight: 0` opens the window maximized.
+
+---
+
+## 🛠 Tech Stack
+
+- **Angular 21** — standalone components, signals, `ChangeDetectionStrategy.OnPush`
+- **Electron** — cross-platform desktop shell
+- **Angular Material 21** — Azure/Blue theme
+- **Tailwind CSS 4** — utility-first styling
+- **TypeScript 5** — strict mode
+
+---
+
+## 📄 License
+
+[MIT](LICENSE) © 2026 superpck
+
 
 To start a local development server, run:
 
@@ -10,7 +175,7 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, open your browser and navigate to `http://localhost:4404/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Code scaffolding
 

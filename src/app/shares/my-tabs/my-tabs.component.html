@@ -1,0 +1,34 @@
+<div class="my-tabs" [class]="'my-tabs--' + variant()">
+
+  <!-- Tab Header -->
+  <div class="my-tabs__header" role="tablist">
+    @for (tab of tabs(); track trackByIndex($index)) {
+      <button
+        class="my-tabs__tab"
+        [class.my-tabs__tab--active]="activeIndex() === $index"
+        [class.my-tabs__tab--disabled]="tab.disabled()"
+        role="tab"
+        [attr.aria-selected]="activeIndex() === $index"
+        [attr.aria-disabled]="tab.disabled()"
+        [attr.tabindex]="activeIndex() === $index ? 0 : -1"
+        (click)="select($index)"
+        (keydown.enter)="select($index)"
+        (keydown.space)="select($index)"
+        matRipple
+        [matRippleDisabled]="tab.disabled()"
+      >
+        @if (tab.icon()) {
+          <mat-icon class="my-tabs__tab-icon" aria-hidden="true">{{ tab.icon() }}</mat-icon>
+        }
+        <span>{{ tab.title() }}</span>
+      </button>
+    }
+    <!-- Active indicator (line variant) -->
+    <div class="my-tabs__indicator" aria-hidden="true"></div>
+  </div>
+
+  <!-- Tab Panels -->
+  <div class="my-tabs__content" role="tabpanel">
+    <ng-content />
+  </div>
+</div>

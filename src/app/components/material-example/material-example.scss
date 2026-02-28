@@ -1,0 +1,223 @@
+.mat-example {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+}
+
+/* ── Docs link ───────────────────────────────── */
+.docs-link-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 20px 0;
+  flex-shrink: 0;
+}
+
+.docs-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #1976d2;
+  text-decoration: none;
+
+  &:hover {
+    color: #0d47a1;
+    text-decoration: underline;
+  }
+}
+
+.docs-link-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Section ─────────────────────────────────── */
+.section {
+  padding: 16px 20px 20px;
+  overflow-y: auto;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin: 0 0 10px;
+}
+
+/* ── Rows / Layout ───────────────────────────── */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &.wrap     { flex-wrap: wrap; }
+  &.gap-xl   { gap: 20px; }
+}
+
+.divider {
+  margin: 16px 0 !important;
+}
+
+/* ── Badges demo ─────────────────────────────── */
+.badge-demo {
+  padding: 4px 0;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+/* ── Progress ─────────────────────────────────── */
+.progress-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  color: #666;
+  white-space: nowrap;
+  width: 180px;
+  flex-shrink: 0;
+}
+
+/* ── Form grid ───────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.hint-text {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 2px 0 0;
+}
+
+/* ── Cards ───────────────────────────────────── */
+.card-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.stats-card {
+  .mat-mdc-card-content { padding: 16px !important; }
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stats-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  &.primary { color: #1565c0; }
+  &.accent  { color: #00897b; }
+}
+
+.stats-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.stats-label {
+  font-size: 0.78rem;
+  color: #888;
+  margin: 0;
+}
+
+/* ── Avatar icon in card ─────────────────────── */
+.avatar-icon {
+  font-size: 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  color: #1565c0;
+}
+
+/* ── List ────────────────────────────────────── */
+.demo-list {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0 !important;
+}
+
+/* ── Table ───────────────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.demo-table {
+  width: 100%;
+}
+
+.status-chip {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  &.status-active   { background: #e8f5e9; color: #2e7d32; }
+  &.status-pending  { background: #fff3e0; color: #e65100; }
+  &.status-inactive { background: #f5f5f5; color: #757575; }
+}
+
+/* ── Expansion panels ────────────────────────── */
+.panel-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+  vertical-align: middle;
+  color: #1565c0;
+}
+
+/* ── Stepper ─────────────────────────────────── */
+.demo-stepper {
+  margin-top: 4px;
+}
+
+.step-content {
+  padding: 8px 0 4px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.step-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}

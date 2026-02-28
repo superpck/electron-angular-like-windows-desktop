@@ -1,0 +1,129 @@
+<div class="profile-page">
+
+  <!-- ── Hero ─────────────────────────────────── -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+
+    <div class="avatar-wrap">
+      @if (profile().avatar) {
+        <img class="avatar-img" [src]="profile().avatar" [alt]="profile().name" />
+      } @else {
+        <div class="avatar-initials">{{ initials() }}</div>
+      }
+      @if (editing()) {
+        <button mat-icon-button class="avatar-edit-btn" matTooltip="Change photo" aria-label="Change photo">
+          <mat-icon>photo_camera</mat-icon>
+        </button>
+      }
+    </div>
+
+    <div class="hero-info">
+      <h2 class="hero-name">{{ profile().name }}</h2>
+      <p class="hero-role">{{ profile().role }}</p>
+    </div>
+
+    @if (!editing()) {
+      <button mat-stroked-button class="edit-btn" (click)="startEdit()">
+        <mat-icon>edit</mat-icon> Edit Profile
+      </button>
+    }
+  </div>
+
+  <!-- ── Stats ─────────────────────────────────── -->
+  <div class="stats-row">
+    @for (s of stats; track s.label) {
+      <div class="stat-card">
+        <span class="stat-value">{{ s.value }}</span>
+        <span class="stat-label">{{ s.label }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- ── Body ──────────────────────────────────── -->
+  <div class="body">
+
+    <!-- View mode -->
+    @if (!editing()) {
+      <div class="info-grid">
+        <div class="info-item">
+          <mat-icon class="info-icon">mail</mat-icon>
+          <div>
+            <p class="info-meta">Email</p>
+            <p class="info-value">{{ profile().email }}</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <mat-icon class="info-icon">phone</mat-icon>
+          <div>
+            <p class="info-meta">Phone</p>
+            <p class="info-value">{{ profile().phone }}</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <mat-icon class="info-icon">location_on</mat-icon>
+          <div>
+            <p class="info-meta">Location</p>
+            <p class="info-value">{{ profile().location }}</p>
+          </div>
+        </div>
+        <div class="info-item info-item--full">
+          <mat-icon class="info-icon">person</mat-icon>
+          <div>
+            <p class="info-meta">Bio</p>
+            <p class="info-value">{{ profile().bio }}</p>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Edit mode -->
+    @if (editing()) {
+      <div class="edit-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Full name</mat-label>
+            <input matInput [ngModel]="draft().name" (ngModelChange)="patchDraft('name', $event)" />
+            <mat-icon matPrefix>badge</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Role</mat-label>
+            <input matInput [ngModel]="draft().role" (ngModelChange)="patchDraft('role', $event)" />
+            <mat-icon matPrefix>work</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [ngModel]="draft().email" (ngModelChange)="patchDraft('email', $event)" />
+            <mat-icon matPrefix>mail</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput [ngModel]="draft().phone" (ngModelChange)="patchDraft('phone', $event)" />
+            <mat-icon matPrefix>phone</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>Location</mat-label>
+            <input matInput [ngModel]="draft().location" (ngModelChange)="patchDraft('location', $event)" />
+            <mat-icon matPrefix>location_on</mat-icon>
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Bio</mat-label>
+          <textarea matInput rows="3" [ngModel]="draft().bio" (ngModelChange)="patchDraft('bio', $event)"></textarea>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-stroked-button (click)="cancelEdit()">Cancel</button>
+          <button mat-flat-button color="primary" (click)="saveEdit()">
+            <mat-icon>save</mat-icon> Save Changes
+          </button>
+        </div>
+      </div>
+    }
+
+  </div>
+</div>

@@ -1,0 +1,227 @@
+<div class="settings-container">
+  <h2 class="settings-title">
+    <mat-icon aria-hidden="true">settings</mat-icon>
+    Desktop Settings
+  </h2>
+
+  <mat-divider />
+
+  <!-- Background Color -->
+  <section class="settings-section">
+    <h3 class="settings-section-title">Background Color</h3>
+
+    <!-- Preview -->
+    <div
+      class="color-preview"
+      [style.background]="previewColor"
+      [style.color]="previewTextColor"
+      role="img"
+      [attr.aria-label]="'Preview: ' + previewColor"
+    >
+      <span class="color-preview-text">Preview Text</span>
+    </div>
+
+    <!-- Preset Colors -->
+    <mat-form-field class="w-full bg-white">
+      <mat-label>Preset</mat-label>
+      <mat-select
+        [value]="selectedPreset()"
+        (valueChange)="onPresetChange($event)"
+        [compareWith]="comparePreset"
+      >
+        @for (c of presetColors; track c.value) {
+          <mat-option [value]="c">
+            <span class="preset-dot" [style.background]="c.value || '#ccc'"></span>
+            {{ c.label }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Custom Color Picker -->
+    <div class="custom-color-row">
+      <label for="colorPicker" class="custom-color-label">Custom color</label>
+      <input
+        id="colorPicker"
+        type="color"
+        class="color-picker-input"
+        [value]="customColor()"
+        (input)="onCustomColorChange($any($event.target).value)"
+        aria-label="Pick custom background color"
+      />
+      <span class="color-hex-label">{{ customColor() }}</span>
+    </div>
+  </section>
+
+  <mat-divider />
+
+  <!-- Text Color -->
+  <section class="settings-section">
+    <h3 class="settings-section-title">Text Color</h3>
+
+    <mat-form-field class="w-full">
+      <mat-label>Preset</mat-label>
+      <mat-select
+        [value]="selectedTextPreset()"
+        (valueChange)="onTextPresetChange($event)"
+        [compareWith]="comparePreset"
+      >
+        @for (c of presetTextColors; track c.value) {
+          <mat-option [value]="c">
+            <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>
+            {{ c.label }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="custom-color-row">
+      <label for="textColorPicker" class="custom-color-label">Custom color</label>
+      <input
+        id="textColorPicker"
+        type="color"
+        class="color-picker-input"
+        [value]="customTextColor()"
+        (input)="onCustomTextColorChange($any($event.target).value)"
+        aria-label="Pick custom text color"
+      />
+      <span class="color-hex-label">{{ customTextColor() }}</span>
+    </div>
+
+    <mat-slide-toggle
+      [checked]="textShadow()"
+      (change)="onTextShadowChange($event.checked)"
+      color="primary"
+    >
+      Text shadow
+    </mat-slide-toggle>
+    <mat-slide-toggle
+      [checked]="iconShadow()"
+      (change)="onIconShadowChange($event.checked)"
+      color="primary"
+    >
+      Icon shadow
+    </mat-slide-toggle>
+  </section>
+
+  <mat-divider />
+
+  <!-- Window Color -->
+  <section class="settings-section">
+    <h3 class="settings-section-title">Window Title Bar Color</h3>
+
+    <!-- Preview -->
+    <div
+      class="color-preview"
+      [style.background]="previewWindowBgColor"
+      [style.color]="previewWindowTextColor"
+      role="img"
+      [attr.aria-label]="'Window preview: ' + previewWindowBgColor"
+    >
+      <span class="color-preview-text">Window Preview Text</span>
+    </div>
+
+    <mat-form-field class="w-full">
+      <mat-label>Background Preset</mat-label>
+      <mat-select
+        [value]="selectedWindowBgPreset()"
+        (valueChange)="onWindowBgPresetChange($event)"
+        [compareWith]="comparePreset"
+      >
+        @for (c of presetWindowBgColors; track c.value) {
+          <mat-option [value]="c">
+            <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>
+            {{ c.label }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="custom-color-row">
+      <label for="windowBgColorPicker" class="custom-color-label">Custom color</label>
+      <input
+        id="windowBgColorPicker"
+        type="color"
+        class="color-picker-input"
+        [value]="customWindowBgColor()"
+        (input)="onWindowBgCustomChange($any($event.target).value)"
+        aria-label="Pick custom window background color"
+      />
+      <span class="color-hex-label">{{ customWindowBgColor() }}</span>
+    </div>
+
+    <h3 class="settings-section-title" style="margin-top: 1rem">Title Bar Text Color</h3>
+
+    <mat-form-field class="w-full">
+      <mat-label>Text Preset</mat-label>
+      <mat-select
+        [value]="selectedWindowTextPreset()"
+        (valueChange)="onWindowTextPresetChange($event)"
+        [compareWith]="comparePreset"
+      >
+        @for (c of presetWindowTextColors; track c.value) {
+          <mat-option [value]="c">
+            <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>
+            {{ c.label }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="custom-color-row">
+      <label for="windowTextColorPicker" class="custom-color-label">Custom color</label>
+      <input
+        id="windowTextColorPicker"
+        type="color"
+        class="color-picker-input"
+        [value]="customWindowTextColor()"
+        (input)="onWindowTextCustomChange($any($event.target).value)"
+        aria-label="Pick custom window text color"
+      />
+      <span class="color-hex-label">{{ customWindowTextColor() }}</span>
+    </div>
+  </section>
+
+  <mat-divider />
+
+  <!-- Clock Format -->
+  <section class="settings-section">
+    <h3 class="settings-section-title">Clock Format</h3>
+    <mat-button-toggle-group
+      [value]="clockFormat()"
+      (valueChange)="onClockFormatChange($event)"
+      aria-label="Clock format"
+      hideSingleSelectionIndicator
+    >
+      <mat-button-toggle value="24h" aria-label="24-hour format">
+        <mat-icon aria-hidden="true">schedule</mat-icon>
+        24h
+      </mat-button-toggle>
+      <mat-button-toggle value="12h" aria-label="12-hour format">
+        <mat-icon aria-hidden="true">access_time</mat-icon>
+        12h
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-slide-toggle
+      [checked]="showSeconds()"
+      (change)="onShowSecondsChange($event.checked)"
+      color="primary"
+    >
+      Show seconds
+    </mat-slide-toggle>
+  </section>
+
+  <mat-divider />
+
+  <!-- Actions -->
+  <div class="settings-actions">
+    <button mat-stroked-button (click)="reset()" type="button">
+      <mat-icon aria-hidden="true">restart_alt</mat-icon>
+      Reset
+    </button>
+    <button mat-flat-button color="primary" (click)="save()" type="button">
+      <mat-icon aria-hidden="true">save</mat-icon>
+      Save
+    </button>
+  </div>
+</div>

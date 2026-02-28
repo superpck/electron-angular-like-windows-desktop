@@ -1,0 +1,127 @@
+<div class="ui-example">
+
+  <app-my-tabs variant="line">
+
+    <!-- ── Tab 1: my-alert ───────────────────────── -->
+    <app-my-tab title="my-alert" icon="notifications">
+      <div class="section">
+        <h3 class="section-title">Alert Dialogs</h3>
+        <p class="section-desc">Simple one-button dialogs — closes on OK.</p>
+        <div class="btn-row">
+          <button mat-flat-button class="btn-success" (click)="showSuccess()">
+            <mat-icon>check_circle</mat-icon> Success
+          </button>
+          <button mat-flat-button class="btn-info" (click)="showInfo()">
+            <mat-icon>info</mat-icon> Info
+          </button>
+          <button mat-flat-button class="btn-warning" (click)="showWarning()">
+            <mat-icon>warning</mat-icon> Warning
+          </button>
+          <button mat-flat-button class="btn-error" (click)="showError()">
+            <mat-icon>error</mat-icon> Error
+          </button>
+        </div>
+
+        <pre class="code-block" [textContent]="codeAlertBasic"></pre>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Confirm &amp; Input Dialogs</h3>
+        <p class="section-desc">Two-button dialogs — resolves a Promise with user response.</p>
+        <div class="btn-row">
+          <button mat-flat-button class="btn-confirm" (click)="showConfirm()">
+            <mat-icon>help</mat-icon> Confirm
+          </button>
+          <button mat-flat-button class="btn-input" (click)="showInput()">
+            <mat-icon>edit</mat-icon> Input
+          </button>
+        </div>
+
+        <pre class="code-block" [textContent]="codeAlertConfirmInput"></pre>
+      </div>
+    </app-my-tab>
+
+    <!-- ── Tab 2: my-toastr ──────────────────────── -->
+    <app-my-tab title="my-toastr" icon="campaign">
+      <div class="section">
+        <h3 class="section-title">Toast Notifications</h3>
+        <p class="section-desc">Non-blocking notifications — auto-dismiss after 4 s.</p>
+        <div class="btn-row">
+          <button mat-flat-button class="btn-success" (click)="toastSuccess()">
+            <mat-icon>check_circle</mat-icon> Success
+          </button>
+          <button mat-flat-button class="btn-info" (click)="toastInfo()">
+            <mat-icon>info</mat-icon> Info
+          </button>
+          <button mat-flat-button class="btn-warning" (click)="toastWarning()">
+            <mat-icon>warning</mat-icon> Warning
+          </button>
+          <button mat-flat-button class="btn-error" (click)="toastError()">
+            <mat-icon>error</mat-icon> Error
+          </button>
+        </div>
+
+        <pre class="code-block" [textContent]="codeToastrBasic"></pre>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Options</h3>
+        <div class="btn-row">
+          <button mat-stroked-button (click)="toastPersistent()">
+            <mat-icon>push_pin</mat-icon> Persistent (no auto-dismiss)
+          </button>
+          <button mat-stroked-button color="warn" (click)="toastClear()">
+            <mat-icon>clear_all</mat-icon> Clear All
+          </button>
+        </div>
+
+        <pre class="code-block" [textContent]="codeToastrOptions"></pre>
+      </div>
+    </app-my-tab>
+
+    <!-- ── Tab 3: my-tabs ────────────────────────── -->
+    <app-my-tab title="my-tabs" icon="tab">
+      <div class="section">
+        <h3 class="section-title">Line Variant</h3>
+        <p class="section-desc">Default tab style with bottom underline indicator.</p>
+        <div class="demo-tabs-wrap">
+          <app-my-tabs variant="line">
+            <app-my-tab title="Alpha" icon="star">
+              <p class="demo-content">Content for <strong>Alpha</strong> tab.</p>
+            </app-my-tab>
+            <app-my-tab title="Beta" icon="bolt">
+              <p class="demo-content">Content for <strong>Beta</strong> tab.</p>
+            </app-my-tab>
+            <app-my-tab title="Gamma (disabled)" [disabled]="true">
+              <p class="demo-content">This tab is disabled.</p>
+            </app-my-tab>
+          </app-my-tabs>
+        </div>
+
+        <pre class="code-block" [textContent]="codeTabsLine"></pre>
+
+        <mat-divider class="divider" />
+
+        <h3 class="section-title">Pill Variant</h3>
+        <p class="section-desc">Segmented pill style — works great for filter toggles.</p>
+        <div class="demo-tabs-wrap">
+          <app-my-tabs variant="pill" [initialIndex]="1">
+            <app-my-tab title="Day">
+              <p class="demo-content">Showing <strong>day</strong> view.</p>
+            </app-my-tab>
+            <app-my-tab title="Week">
+              <p class="demo-content">Showing <strong>week</strong> view.</p>
+            </app-my-tab>
+            <app-my-tab title="Month">
+              <p class="demo-content">Showing <strong>month</strong> view.</p>
+            </app-my-tab>
+          </app-my-tabs>
+        </div>
+
+        <pre class="code-block" [textContent]="codeTabsPill"></pre>
+      </div>
+    </app-my-tab>
+
+  </app-my-tabs>
+
+</div>

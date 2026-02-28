@@ -1,0 +1,225 @@
+<!-- Desktop surface -->
+<div class="desktop-surface" [style.background]="backgroundColor()" [style.color]="textColor()" [class.text-shadow-on]="textShadow()" [class.icon-shadow-on]="iconShadow()">
+
+  <!-- Settings Cog (top-right) -->
+  <button
+    class="desktop-cog-btn"
+    (click)="openSettings()"
+    title="Desktop Settings"
+    aria-label="Open Desktop Settings"
+    type="button"
+  >
+    &#x2699;
+  </button>
+
+  <!-- Desktop Icons -->
+  <div class="desktop-icons">
+    @for (icon of desktopIcon(); track icon.id) {
+      <button
+        class="desktop-icon"
+        (dblclick)="openWindow(icon)"
+        [attr.aria-label]="'Open ' + icon.label"
+        type="button"
+      >
+        <img [src]="icon.icon" [alt]="icon.label" class="desktop-icon-img" />
+        <span class="desktop-icon-label">{{ icon.label }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- Floating Windows -->
+  @for (win of windows(); track win.id) {
+    @if (!win.minimized) {
+      <div
+        class="window"
+        [style.left]="win.maximized ? '0px' : win.x + 'px'"
+        [style.top]="win.maximized ? '0px' : win.y + 'px'"
+        [style.width]="win.maximized ? '100vw' : win.width + 'px'"
+        [style.height]="win.maximized ? 'calc(100vh - 48px)' : win.height + 'px'"
+        [style.z-index]="win.zIndex"
+        (mousedown)="bringToFront(win.id)"
+        role="dialog"
+        [attr.aria-label]="win.title"
+      >
+        <!-- Title Bar -->
+        <div
+          class="window-titlebar"
+          [style.background]="windowBgColor()"
+          [style.color]="windowTextColor()"
+          (mousedown)="startDrag($event, win.id)"
+          (dblclick)="toggleMaximize(win.id)"
+        >
+          <span class="window-title">
+            <img [src]="win.icon" [alt]="" class="window-title-icon" aria-hidden="true" />
+            {{ win.title }}
+          </span>
+          <div class="window-controls">
+            <button
+              class="win-btn win-btn-min"
+              (click)="minimizeWindow(win.id)"
+              (mousedown)="$event.stopPropagation()"
+              title="Minimize"
+              aria-label="Minimize"
+              type="button"
+            >
+              &#x2212;
+            </button>
+            <button
+              class="win-btn win-btn-max"
+              (click)="toggleMaximize(win.id)"
+              (mousedown)="$event.stopPropagation()"
+              [title]="win.maximized ? 'Restore' : 'Maximize'"
+              [attr.aria-label]="win.maximized ? 'Restore' : 'Maximize'"
+              type="button"
+            >
+              @if (win.maximized) {
+                &#x2752;
+              } @else {
+                &#x25A1;
+              }
+            </button>
+            <button
+              class="win-btn win-btn-close"
+              (click)="closeWindow(win.id)"
+              (mousedown)="$event.stopPropagation()"
+              title="Close"
+              aria-label="Close"
+              type="button"
+            >
+              &#x2715;
+            </button>
+          </div>
+        </div>
+
+        <!-- Window Content -->
+        <div class="window-content">
+          <ng-container [ngComponentOutlet]="win.component" />
+        </div>
+
+        <!-- Resize Handle -->
+        @if (!win.maximized) {
+          <div
+            class="resize-handle"
+            (mousedown)="startResize($event, win.id)"
+            aria-hidden="true"
+          ></div>
+        }
+      </div>
+    }
+  }
+
+</div>
+
+<!-- Start Menu Overlay (close on outside click) -->
+@if (startMenuOpen()) {
+  <div class="start-menu-overlay" (click)="closeStartMenu()" aria-hidden="true"></div>
+}
+
+<!-- Start Menu -->
+@if (startMenuOpen()) {
+  <div class="start-menu" role="menu" aria-label="Start Menu">
+    <div class="start-menu-header">
+      @if (currentUser()) {
+        <span class="start-menu-user">{{ currentUser()!.name }}</span>
+        <span class="start-menu-level">{{ currentUser()!.level }}</span>
+      } @else {
+        <span>Menu</span>
+      }
+    </div>
+    <div class="start-menu-items">
+      @for (item of startMenu(); track item.id) {
+        @if (item.children?.length) {
+          <!-- Submenu group -->
+          <button
+            class="start-menu-item start-menu-item--group"
+            [class.start-menu-item--active]="activeSubmenu()?.id === item.id"
+            (click)="selectMenuItem(item)"
+            [attr.aria-haspopup]="true"
+            [attr.aria-expanded]="activeSubmenu()?.id === item.id"
+            role="menuitem"
+            type="button"
+          >
+            <img [src]="item.icon" [alt]="" class="start-menu-icon" aria-hidden="true" />
+            <span class="flex-1">{{ item.label }}</span>
+            <span class="start-menu-arrow" [class.start-menu-arrow--open]="activeSubmenu()?.id === item.id">&#x276F;</span>
+          </button>
+          <!-- Submenu panel -->
+          @if (activeSubmenu()?.id === item.id) {
+            <div class="start-submenu" role="menu" [attr.aria-label]="item.label + ' submenu'">
+              @for (child of item.children; track child.id) {
+                <button
+                  class="start-menu-item start-submenu-item"
+                  (click)="selectMenuItem(child)"
+                  role="menuitem"
+                  type="button"
+                >
+                  <img [src]="child.icon" [alt]="" class="start-menu-icon" aria-hidden="true" />
+                  <span>{{ child.label }}</span>
+                </button>
+              }
+            </div>
+          }
+        } @else {
+          <button
+            class="start-menu-item"
+            (click)="selectMenuItem(item)"
+            role="menuitem"
+            type="button"
+          >
+            <img [src]="item.icon" [alt]="" class="start-menu-icon" aria-hidden="true" />
+            <span>{{ item.label }}</span>
+          </button>
+        }
+      }
+    </div>
+    <div class="start-menu-footer">
+      <button
+        class="start-menu-item start-menu-logout"
+        (click)="logout()"
+        role="menuitem"
+        type="button"
+        aria-label="Logout"
+      >
+        <span class="start-menu-logout-icon" aria-hidden="true">&#x23FB;</span>
+        <span>Logout</span>
+      </button>
+    </div>
+  </div>
+}
+
+<!-- Taskbar -->
+<div class="taskbar" role="toolbar" aria-label="Taskbar">
+  <!-- Start Button -->
+  <button
+    class="start-btn"
+    (click)="toggleStartMenu()"
+    [class.active]="startMenuOpen()"
+    aria-haspopup="menu"
+    [attr.aria-expanded]="startMenuOpen()"
+    type="button"
+  >
+    <span class="start-btn-icon">&#x229E;</span>
+    <span>Start</span>
+  </button>
+
+  <!-- Divider -->
+  <div class="taskbar-divider" aria-hidden="true"></div>
+
+  <!-- Open Windows -->
+  <div class="taskbar-windows" role="group" aria-label="Open windows">
+    @for (win of windows(); track win.id) {
+      <button
+        class="taskbar-btn"
+        [class.taskbar-btn-minimized]="win.minimized"
+        (click)="toggleMinimize(win.id)"
+        [attr.aria-pressed]="!win.minimized"
+        type="button"
+      >
+        {{ win.title }}
+      </button>
+    }
+  </div>
+
+  <!-- Clock -->
+  <div class="taskbar-clock" role="timer" aria-live="off">{{ currentTime() }}</div>
+</div>

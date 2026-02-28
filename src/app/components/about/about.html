@@ -1,0 +1,75 @@
+<div class="about-container">
+
+  <!-- Hero -->
+  <div class="about-hero">
+    <div class="about-logo-ring">
+      <img [src]="config.appIcon" [alt]="config.appName" class="about-logo" />
+    </div>
+    <h1 class="about-app-name">{{ config.appName }}</h1>
+    <div class="about-badges">
+      <span class="badge badge-version">
+        <mat-icon class="badge-icon" aria-hidden="true">tag</mat-icon>
+        v{{ config.appVersion }}
+      </span>
+      <span class="badge badge-build">
+        <mat-icon class="badge-icon" aria-hidden="true">build_circle</mat-icon>
+        {{ config.appSubversion }}
+      </span>
+    </div>
+  </div>
+
+  <mat-divider />
+
+  <!-- Tech Stack -->
+  <section class="about-section">
+    <h2 class="about-section-title">
+      <mat-icon aria-hidden="true">layers</mat-icon>
+      Built with
+    </h2>
+    <div class="tech-grid">
+      @for (tech of techStack; track tech.name) {
+        <div class="tech-card">
+          <img [src]="tech.icon" [alt]="tech.name" class="tech-icon" />
+          <span class="tech-name">{{ tech.name }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <mat-divider />
+
+  <!-- Info -->
+  <section class="about-section">
+    <h2 class="about-section-title">
+      <mat-icon aria-hidden="true">info</mat-icon>
+      Information
+    </h2>
+    <div class="info-grid">
+      <div class="info-row">
+        <span class="info-label">Application</span>
+        <span class="info-value">{{ config.appName }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Version</span>
+        <span class="info-value">{{ config.appVersion }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Build</span>
+        <span class="info-value">{{ config.appSubversion }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Platform</span>
+        <span class="info-value">Electron + Angular</span>
+      </div>
+    </div>
+  </section>
+
+  <mat-divider />
+
+  <!-- Footer -->
+  <footer class="about-footer">
+    <mat-icon aria-hidden="true" class="footer-icon">copyright</mat-icon>
+    <span>{{ buildYear }} {{ config.appName }}. All rights reserved.</span>
+  </footer>
+
+</div>

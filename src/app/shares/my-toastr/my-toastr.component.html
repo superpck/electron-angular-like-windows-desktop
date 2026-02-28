@@ -1,0 +1,38 @@
+<div class="toastr-container" role="region" aria-live="polite" aria-label="Notifications">
+  @for (item of toasts(); track trackById($index, item)) {
+    <div
+      class="toastr-item toastr-{{ item.type }}"
+      [class.toastr-leaving]="isLeaving(item.id)"
+      role="alert"
+      [attr.aria-label]="titleOf(item) + ': ' + item.message"
+    >
+
+      <!-- Left accent bar animated as progress -->
+      @if (item.duration > 0) {
+        <div
+          class="toastr-progress"
+          [style.animation-duration.ms]="item.duration"
+        ></div>
+      }
+
+      <!-- Icon -->
+      <mat-icon class="toastr-icon" aria-hidden="true">{{ iconOf(item.type) }}</mat-icon>
+
+      <!-- Text -->
+      <div class="toastr-body">
+        <span class="toastr-title">{{ titleOf(item) }}</span>
+        <span class="toastr-message">{{ item.message }}</span>
+      </div>
+
+      <!-- Close button -->
+      <button
+        mat-icon-button
+        class="toastr-close"
+        (click)="dismiss(item.id)"
+        [attr.aria-label]="'Dismiss ' + titleOf(item) + ' notification'"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  }
+</div>

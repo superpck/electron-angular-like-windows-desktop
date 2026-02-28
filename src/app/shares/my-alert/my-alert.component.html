@@ -1,0 +1,44 @@
+<div class="alert-dialog" [class]="'alert-type-' + data.type">
+  <!-- Header -->
+  <div class="alert-header">
+    <mat-icon class="alert-icon" aria-hidden="true">{{ icon }}</mat-icon>
+    <h2 class="alert-title" mat-dialog-title>{{ title }}</h2>
+  </div>
+
+  <!-- Body -->
+  <mat-dialog-content class="alert-body">
+    <p class="alert-message">{{ data.message }}</p>
+
+    @if (isInput) {
+      <mat-form-field appearance="outline" class="alert-input-field">
+        <input
+          matInput
+          [placeholder]="data.placeholder ?? ''"
+          [ngModel]="inputValue()"
+          (ngModelChange)="inputValue.set($event)"
+          (keyup.enter)="confirm()"
+          aria-label="Input value"
+          cdkFocusInitial
+        />
+      </mat-form-field>
+    }
+  </mat-dialog-content>
+
+  <!-- Actions -->
+  <mat-dialog-actions class="alert-actions">
+    @if (isConfirm || isInput) {
+      <button mat-stroked-button (click)="cancel()" type="button">
+        {{ data.cancelLabel ?? 'Cancel' }}
+      </button>
+    }
+    <button
+      mat-flat-button
+      class="alert-confirm-btn"
+      (click)="confirm()"
+      type="button"
+      cdkFocusInitial
+    >
+      {{ isConfirm || isInput ? (data.confirmLabel ?? 'OK') : 'OK' }}
+    </button>
+  </mat-dialog-actions>
+</div>
