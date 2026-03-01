@@ -33,7 +33,26 @@ A desktop environment built with **Angular 21** + **Electron**, styled after a W
 
 ---
 
-## 🗂 Project Structure
+## � Screenshots
+
+### 1. Login Screen
+![Login Screen](public/documents/login.png)
+
+### 2. Desktop Layout
+![Desktop Layout](public/documents/start_up.png)
+
+### 3. Computer Detail & Resource Usage
+![Computer Detail and Resource Usage](public/documents/computer_resurce.png)
+
+### 4. User CRUD
+![User CRUD](public/documents/user_crud.png)
+
+### 5. Example UI
+![Example UI](public/documents/ui_example.png)
+
+---
+
+## �🗂 Project Structure
 
 ```
 src/
