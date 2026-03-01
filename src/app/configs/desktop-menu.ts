@@ -59,7 +59,7 @@ export const DESKTOP_ICONS: AppItem[] = [
   {
     id: 'chat',
     label: 'Chat',
-    icon: 'assets/images/chat.png',
+    icon: 'assets/images/chat2.png',
     component: Chat,
     defaultWidth: 900,
     defaultHeight: 600,
