@@ -15,19 +15,20 @@
 
       <div class="tab-content">
         <!-- Background Color -->
-        <section class="settings-section">
+        <section class="settings-section mb-2">
+          <div class="text-blue-600 my-2 text-2xl font-bold">1.Desktop</div>
           <h3 class="settings-section-title">Background Color</h3>
-          <div class="color-preview" [style.background]="previewColor" [style.color]="previewTextColor"
-            role="img" [attr.aria-label]="'Preview: ' + previewColor">
+          <div class="color-preview" [style.background]="previewColor" [style.color]="previewTextColor" role="img"
+            [attr.aria-label]="'Preview: ' + previewColor">
             <span class="color-preview-text">Preview Text</span>
           </div>
           <mat-form-field class="w-full">
             <mat-label>Preset</mat-label>
             <mat-select [value]="selectedPreset()" (valueChange)="onPresetChange($event)" [compareWith]="comparePreset">
               @for (c of presetColors; track c.value) {
-                <mat-option [value]="c">
-                  <span class="preset-dot" [style.background]="c.value || '#ccc'"></span>{{ c.label }}
-                </mat-option>
+              <mat-option [value]="c">
+                <span class="preset-dot" [style.background]="c.value || '#ccc'"></span>{{ c.label }}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -42,15 +43,17 @@
         <mat-divider />
 
         <!-- Text Color -->
-        <section class="settings-section">
+        <section class="settings-section my-4">
           <h3 class="settings-section-title">Text Color</h3>
           <mat-form-field class="w-full">
             <mat-label>Preset</mat-label>
-            <mat-select [value]="selectedTextPreset()" (valueChange)="onTextPresetChange($event)" [compareWith]="comparePreset">
+            <mat-select [value]="selectedTextPreset()" (valueChange)="onTextPresetChange($event)"
+              [compareWith]="comparePreset">
               @for (c of presetTextColors; track c.value) {
-                <mat-option [value]="c">
-                  <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{ c.label }}
-                </mat-option>
+              <mat-option [value]="c">
+                <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{
+                c.label }}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
@@ -71,43 +74,50 @@
         <mat-divider />
 
         <!-- Window Title Bar Color -->
-        <section class="settings-section">
-          <h3 class="settings-section-title">Window Title Bar Color</h3>
+        <section class="settings-section mb-2">
+          <div class="text-blue-600 my-2 text-2xl font-bold">2.Window Title Bar</div>
+          <h3 class="settings-section-title">Background Color</h3>
           <div class="color-preview" [style.background]="previewWindowBgColor" [style.color]="previewWindowTextColor"
             role="img" [attr.aria-label]="'Window preview: ' + previewWindowBgColor">
             <span class="color-preview-text">Window Preview Text</span>
           </div>
           <mat-form-field class="w-full">
             <mat-label>Background Preset</mat-label>
-            <mat-select [value]="selectedWindowBgPreset()" (valueChange)="onWindowBgPresetChange($event)" [compareWith]="comparePreset">
+            <mat-select [value]="selectedWindowBgPreset()" (valueChange)="onWindowBgPresetChange($event)"
+              [compareWith]="comparePreset">
               @for (c of presetWindowBgColors; track c.value) {
-                <mat-option [value]="c">
-                  <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{ c.label }}
-                </mat-option>
+              <mat-option [value]="c">
+                <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{
+                c.label }}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
           <div class="custom-color-row">
             <label for="windowBgColorPicker" class="custom-color-label">Custom color</label>
             <input id="windowBgColorPicker" type="color" class="color-picker-input" [value]="customWindowBgColor()"
-              (input)="onWindowBgCustomChange($any($event.target).value)" aria-label="Pick custom window background color" />
+              (input)="onWindowBgCustomChange($any($event.target).value)"
+              aria-label="Pick custom window background color" />
             <span class="color-hex-label">{{ customWindowBgColor() }}</span>
           </div>
-          <h3 class="settings-section-title" style="margin-top: 1rem">Title Bar Text Color</h3>
+          <h3 class="settings-section-title" style="margin-top: 1rem">Text Color</h3>
           <mat-form-field class="w-full">
             <mat-label>Text Preset</mat-label>
-            <mat-select [value]="selectedWindowTextPreset()" (valueChange)="onWindowTextPresetChange($event)" [compareWith]="comparePreset">
+            <mat-select [value]="selectedWindowTextPreset()" (valueChange)="onWindowTextPresetChange($event)"
+              [compareWith]="comparePreset">
               @for (c of presetWindowTextColors; track c.value) {
-                <mat-option [value]="c">
-                  <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{ c.label }}
-                </mat-option>
+              <mat-option [value]="c">
+                <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{
+                c.label }}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
           <div class="custom-color-row">
             <label for="windowTextColorPicker" class="custom-color-label">Custom color</label>
             <input id="windowTextColorPicker" type="color" class="color-picker-input" [value]="customWindowTextColor()"
-              (input)="onWindowTextCustomChange($any($event.target).value)" aria-label="Pick custom window text color" />
+              (input)="onWindowTextCustomChange($any($event.target).value)"
+              aria-label="Pick custom window text color" />
             <span class="color-hex-label">{{ customWindowTextColor() }}</span>
           </div>
         </section>
@@ -116,6 +126,7 @@
 
         <!-- Clock Format -->
         <section class="settings-section">
+          <div class="text-blue-600 my-2 text-2xl font-bold">3.Clock format</div>
           <h3 class="settings-section-title">Clock Format</h3>
           <mat-button-toggle-group [value]="clockFormat()" (valueChange)="onClockFormatChange($event)"
             aria-label="Clock format" hideSingleSelectionIndicator>
@@ -146,15 +157,11 @@
         <!-- Preview -->
         <section class="settings-section">
           <h3 class="settings-section-title">Preview</h3>
-          <div class="taskbar-preview"
-               [style.background]="previewTaskbarBgColor"
-               [style.color]="previewTaskbarTextColor"
-               aria-hidden="true">
-            <div class="taskbar-preview__start"
-                 [style.background]="previewStartBtnBgColor"
-                 [style.color]="previewStartBtnTextColor">&#x229E; Start</div>
-            <div class="taskbar-preview__btn"
-                 [style.border-color]="previewTaskbarTextColor + '44'">Window 1</div>
+          <div class="taskbar-preview" [style.background]="previewTaskbarBgColor"
+            [style.color]="previewTaskbarTextColor" aria-hidden="true">
+            <div class="taskbar-preview__start" [style.background]="previewStartBtnBgColor"
+              [style.color]="previewStartBtnTextColor">&#x229E; Start</div>
+            <div class="taskbar-preview__btn" [style.border-color]="previewTaskbarTextColor + '44'">Window 1</div>
             <div class="taskbar-preview__spacer"></div>
             <div class="taskbar-preview__clock">12:00</div>
           </div>
@@ -163,22 +170,26 @@
         <mat-divider />
 
         <!-- Taskbar Background Color -->
-        <section class="settings-section">
+        <section class="settings-section mt-2">
+          <div class="text-blue-600 my-2 text-2xl font-bold">1.Taskbar</div>
           <h3 class="settings-section-title">Background Color</h3>
           <mat-form-field class="w-full">
             <mat-label>Preset</mat-label>
-            <mat-select [value]="selectedTaskbarBgPreset()" (valueChange)="onTaskbarBgPresetChange($event)" [compareWith]="comparePreset">
+            <mat-select [value]="selectedTaskbarBgPreset()" (valueChange)="onTaskbarBgPresetChange($event)"
+              [compareWith]="comparePreset">
               @for (c of presetTaskbarBgColors; track c.value) {
-                <mat-option [value]="c">
-                  <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{ c.label }}
-                </mat-option>
+              <mat-option [value]="c">
+                <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{
+                c.label }}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
           <div class="custom-color-row">
             <label for="taskbarBgPicker" class="custom-color-label">Custom color</label>
             <input id="taskbarBgPicker" type="color" class="color-picker-input" [value]="customTaskbarBgColor()"
-              (input)="onTaskbarBgCustomChange($any($event.target).value)" aria-label="Pick custom taskbar background color" />
+              (input)="onTaskbarBgCustomChange($any($event.target).value)"
+              aria-label="Pick custom taskbar background color" />
             <span class="color-hex-label">{{ customTaskbarBgColor() }}</span>
           </div>
         </section>
@@ -190,18 +201,21 @@
           <h3 class="settings-section-title">Text &amp; Icon Color</h3>
           <mat-form-field class="w-full">
             <mat-label>Preset</mat-label>
-            <mat-select [value]="selectedTaskbarTextPreset()" (valueChange)="onTaskbarTextPresetChange($event)" [compareWith]="comparePreset">
+            <mat-select [value]="selectedTaskbarTextPreset()" (valueChange)="onTaskbarTextPresetChange($event)"
+              [compareWith]="comparePreset">
               @for (c of presetTaskbarTextColors; track c.value) {
-                <mat-option [value]="c">
-                  <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{ c.label }}
-                </mat-option>
+              <mat-option [value]="c">
+                <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{
+                c.label }}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
           <div class="custom-color-row">
             <label for="taskbarTextPicker" class="custom-color-label">Custom color</label>
             <input id="taskbarTextPicker" type="color" class="color-picker-input" [value]="customTaskbarTextColor()"
-              (input)="onTaskbarTextCustomChange($any($event.target).value)" aria-label="Pick custom taskbar text color" />
+              (input)="onTaskbarTextCustomChange($any($event.target).value)"
+              aria-label="Pick custom taskbar text color" />
             <span class="color-hex-label">{{ customTaskbarTextColor() }}</span>
           </div>
         </section>
@@ -209,22 +223,26 @@
         <mat-divider />
 
         <!-- Start Button Background Color -->
-        <section class="settings-section">
-          <h3 class="settings-section-title">Start Button Background</h3>
+        <section class="settings-section my-2">
+          <div class="text-blue-600 my-2 text-2xl font-bold">2.Start Menu Button</div>
+          <h3 class="settings-section-title">Background</h3>
           <mat-form-field class="w-full">
             <mat-label>Preset</mat-label>
-            <mat-select [value]="selectedStartBtnBgPreset()" (valueChange)="onStartBtnBgPresetChange($event)" [compareWith]="comparePreset">
+            <mat-select [value]="selectedStartBtnBgPreset()" (valueChange)="onStartBtnBgPresetChange($event)"
+              [compareWith]="comparePreset">
               @for (c of presetStartBtnBgColors; track c.value) {
-                <mat-option [value]="c">
-                  <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{ c.label }}
-                </mat-option>
+              <mat-option [value]="c">
+                <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{
+                c.label }}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
           <div class="custom-color-row">
             <label for="startBtnBgPicker" class="custom-color-label">Custom color</label>
             <input id="startBtnBgPicker" type="color" class="color-picker-input" [value]="customStartBtnBgColor()"
-              (input)="onStartBtnBgCustomChange($any($event.target).value)" aria-label="Pick custom start button background color" />
+              (input)="onStartBtnBgCustomChange($any($event.target).value)"
+              aria-label="Pick custom start button background color" />
             <span class="color-hex-label">{{ customStartBtnBgColor() }}</span>
           </div>
         </section>
@@ -232,22 +250,25 @@
         <mat-divider />
 
         <!-- Start Button Text Color -->
-        <section class="settings-section">
-          <h3 class="settings-section-title">Start Button Text Color</h3>
+        <section class="settings-section mt-2">
+          <h3 class="settings-section-title">Text Color</h3>
           <mat-form-field class="w-full">
             <mat-label>Preset</mat-label>
-            <mat-select [value]="selectedStartBtnTextPreset()" (valueChange)="onStartBtnTextPresetChange($event)" [compareWith]="comparePreset">
+            <mat-select [value]="selectedStartBtnTextPreset()" (valueChange)="onStartBtnTextPresetChange($event)"
+              [compareWith]="comparePreset">
               @for (c of presetStartBtnTextColors; track c.value) {
-                <mat-option [value]="c">
-                  <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{ c.label }}
-                </mat-option>
+              <mat-option [value]="c">
+                <span class="preset-dot" [style.background]="c.value || '#ccc'" style="border: 1px solid #ccc"></span>{{
+                c.label }}
+              </mat-option>
               }
             </mat-select>
           </mat-form-field>
           <div class="custom-color-row">
             <label for="startBtnTextPicker" class="custom-color-label">Custom color</label>
             <input id="startBtnTextPicker" type="color" class="color-picker-input" [value]="customStartBtnTextColor()"
-              (input)="onStartBtnTextCustomChange($any($event.target).value)" aria-label="Pick custom start button text color" />
+              (input)="onStartBtnTextCustomChange($any($event.target).value)"
+              aria-label="Pick custom start button text color" />
             <span class="color-hex-label">{{ customStartBtnTextColor() }}</span>
           </div>
         </section>
@@ -270,4 +291,3 @@
     </button>
   </div>
 </div>
-

@@ -162,7 +162,7 @@
   border: none;
   border-radius: 3px;
   background: transparent;
-  color: #fff;
+  color: inherit;
   font-size: 13px;
   line-height: 1;
   cursor: pointer;
@@ -173,16 +173,17 @@
 }
 
 .win-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: color-mix(in srgb, currentColor 15%, transparent);
 }
 
 .win-btn:focus-visible {
-  outline: 2px solid #fff;
+  outline: 2px solid currentColor;
   outline-offset: -1px;
 }
 
 .win-btn-close:hover {
   background: #e81123;
+  color: #ffffff;
 }
 
 /* ===== Window Content ===== */
