@@ -1,0 +1,133 @@
+<div class="chat-shell">
+
+  <!-- ── Sidebar ─────────────────────────────────────────────────────── -->
+  <aside class="chat-sidebar" aria-label="Contacts">
+    <header class="sidebar-header">
+      <mat-icon class="sidebar-logo" aria-hidden="true">chat_bubble</mat-icon>
+      <span class="sidebar-title">Messages</span>
+      @if (totalUnread() > 0) {
+        <span class="sidebar-badge" aria-label="{{ totalUnread() }} unread">{{ totalUnread() }}</span>
+      }
+    </header>
+
+    <nav class="contact-list" role="list">
+      @for (c of contacts(); track c.id) {
+        <button
+          class="contact-item"
+          [class.active]="c.id === selectedContactId()"
+          (click)="selectContact(c.id)"
+          [attr.aria-current]="c.id === selectedContactId() ? 'true' : null"
+          type="button"
+          role="listitem"
+        >
+          <div class="contact-avatar" [style.background]="avatarColor(c.id)" aria-hidden="true">
+            {{ initials(c.name) }}
+            <span class="status-dot" [class]="'status-dot--' + c.status" aria-label="{{ c.status }}"></span>
+          </div>
+          <div class="contact-info">
+            <span class="contact-name">{{ c.name }}</span>
+            <span class="contact-role">{{ c.role }}</span>
+          </div>
+          @if (c.unread > 0) {
+            <span class="unread-badge" aria-label="{{ c.unread }} unread">{{ c.unread }}</span>
+          }
+        </button>
+      }
+    </nav>
+  </aside>
+
+  <!-- ── Chat Area ───────────────────────────────────────────────────── -->
+  <main class="chat-main">
+
+    <!-- Header -->
+    @if (selectedContact(); as contact) {
+      <header class="chat-header">
+        <div class="chat-header__avatar" [style.background]="avatarColor(contact.id)" aria-hidden="true">
+          {{ initials(contact.name) }}
+        </div>
+        <div class="chat-header__info">
+          <span class="chat-header__name">{{ contact.name }}</span>
+          <span class="chat-header__status" [class]="'status-text--' + contact.status">
+            <span class="status-dot status-dot--inline" [class]="'status-dot--' + contact.status"></span>
+            {{ contact.status }}
+          </span>
+        </div>
+        <div class="chat-header__actions">
+          <button mat-icon-button matTooltip="Voice call" type="button" aria-label="Voice call" disabled>
+            <mat-icon>call</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Video call" type="button" aria-label="Video call" disabled>
+            <mat-icon>videocam</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Search messages" type="button" aria-label="Search" disabled>
+            <mat-icon>search</mat-icon>
+          </button>
+        </div>
+      </header>
+
+      <!-- Messages -->
+      <section class="message-list" #messageList aria-label="Messages" aria-live="polite">
+        @for (msg of currentMessages(); track msg.id) {
+          <div class="message" [class.message--me]="msg.from === 'me'" [class.message--them]="msg.from === 'them'">
+            @if (msg.from === 'them') {
+              <div class="message__avatar" [style.background]="avatarColor(contact.id)" aria-hidden="true">
+                {{ initials(contact.name) }}
+              </div>
+            }
+            <div class="message__bubble">
+              <p class="message__text">{{ msg.text }}</p>
+              <time class="message__time" [attr.datetime]="msg.time.toISOString()">
+                {{ msg.time | date:'HH:mm' }}
+              </time>
+            </div>
+          </div>
+        }
+
+        @if (isTyping()) {
+          <div class="message message--them">
+            <div class="message__avatar" [style.background]="avatarColor(contact.id)" aria-hidden="true">
+              {{ initials(contact.name) }}
+            </div>
+            <div class="message__bubble message__bubble--typing" aria-label="{{ contact.name }} is typing">
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+            </div>
+          </div>
+        }
+      </section>
+
+      <!-- Input -->
+      <footer class="chat-input-bar">
+        <button mat-icon-button type="button" aria-label="Attach file" disabled matTooltip="Attach file">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <button mat-icon-button type="button" aria-label="Emoji" disabled matTooltip="Emoji">
+          <mat-icon>emoji_emotions</mat-icon>
+        </button>
+        <textarea
+          class="chat-input"
+          [value]="inputText()"
+          (input)="inputText.set($any($event.target).value)"
+          (keydown)="onKeyDown($event)"
+          placeholder="Type a message… (Enter to send)"
+          rows="1"
+          aria-label="Message input"
+          [disabled]="contact.status === 'offline'"
+        ></textarea>
+        <button
+          mat-icon-button
+          class="send-btn"
+          (click)="send()"
+          type="button"
+          aria-label="Send message"
+          matTooltip="Send (Enter)"
+          [disabled]="!inputText().trim() || contact.status === 'offline'"
+        >
+          <mat-icon>send</mat-icon>
+        </button>
+      </footer>
+    }
+  </main>
+
+</div>

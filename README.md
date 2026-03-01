@@ -29,6 +29,7 @@ A desktop environment built with **Angular 21** + **Electron**, styled after a W
 | 👥 User management | User list window |
 | 🔑 Auth | Login page with route guards |
 | 💻 About | System info (CPU, Memory, Storage, Network) via Electron preload |
+| 💬 Chat | Fake real-time chat with 5 contacts (online/away/busy/offline), typing indicator, auto-replies, and unread badges |
 
 ---
 
@@ -169,6 +170,9 @@ Add windows by editing `src/app/configs/desktop-menu.ts`:
 ---
 
 ## � Changelog
+
+### v1.2.0 — 2026-03-01
+- **Chat**: fake real-time chat window with 5 contacts (online / away / busy / offline), typing indicator, auto-replies, unread badges, and per-contact message history
 
 ### v1.1.0 — 2026-03-01
 - **Taskbar**: each open-window button now displays the app icon alongside the title

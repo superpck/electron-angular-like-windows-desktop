@@ -1,4 +1,5 @@
 import { About } from '../components/about/about';
+import { Chat } from '../components/chat/chat';
 import { Profile } from '../components/profile/profile';
 import { User } from '../components/user/user';
 import { MyUiExample } from '../components/my-ui-example/my-ui-example';
@@ -62,6 +63,14 @@ export const DESKTOP_ICONS: AppItem[] = [
     component: User,
     defaultWidth: 0,  // 0 = open maximized
     defaultHeight: 0,
+  },
+  {
+    id: 'chat',
+    label: 'Chat',
+    icon: 'assets/images/chat.png',
+    component: Chat,
+    defaultWidth: 900,
+    defaultHeight: 600,
   },
   // ↓ ADD NEW DESKTOP ICONS HERE ↓
 ];
@@ -158,6 +167,14 @@ export const START_MENU_ITEMS: AppItem[] = [
       },
       // ↓ ADD NEW SUBMENU CHILDREN HERE ↓
     ],
+  },
+  {
+    id: 'chat',
+    label: 'Chat',
+    icon: 'assets/images/chat.png',
+    component: Chat,
+    defaultWidth: 900,
+    defaultHeight: 600,
   },
   // ↓ ADD NEW START MENU ITEMS HERE ↓
 ];
