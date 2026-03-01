@@ -64,6 +64,10 @@ export class Desktop {
   readonly iconShadow = this.settingsService.iconShadow;
   readonly windowBgColor = this.settingsService.windowBgColor;
   readonly windowTextColor = this.settingsService.windowTextColor;
+  readonly taskbarBgColor = this.settingsService.taskbarBgColor;
+  readonly taskbarTextColor = this.settingsService.taskbarTextColor;
+  readonly startBtnBgColor = this.settingsService.startBtnBgColor;
+  readonly startBtnTextColor = this.settingsService.startBtnTextColor;
 
   desktopIcon = signal<AppItem[]>(DESKTOP_ICONS);
 

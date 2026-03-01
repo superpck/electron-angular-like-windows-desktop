@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ClockFormat, DesktopSettingsService } from '../../services/desktop-settings.service';
 
 const PRESET_COLORS = [
@@ -54,6 +55,45 @@ const PRESET_WINDOW_TEXT_COLORS = [
   { label: 'Custom', value: '' },
 ];
 
+const PRESET_TASKBAR_BG_COLORS = [
+  { label: 'Light Gray (Default)', value: '#f3f3f3' },
+  { label: 'White', value: '#ffffff' },
+  { label: 'Silver', value: '#e0e0e0' },
+  { label: 'Warm Gray', value: '#edede9' },
+  { label: 'Dark', value: '#1f1f1f' },
+  { label: 'Midnight Blue', value: '#1a3a5c' },
+  { label: 'Custom', value: '' },
+];
+
+const PRESET_TASKBAR_TEXT_COLORS = [
+  { label: 'Dark (Default)', value: '#1f1f1f' },
+  { label: 'Black', value: '#000000' },
+  { label: 'Gray', value: '#444444' },
+  { label: 'White', value: '#ffffff' },
+  { label: 'Light Gray', value: '#e0e0e0' },
+  { label: 'Custom', value: '' },
+];
+
+const PRESET_START_BTN_BG_COLORS = [
+  { label: 'Blue (Default)', value: '#0067c0' },
+  { label: 'Dark Blue', value: '#003d80' },
+  { label: 'Sky Blue', value: '#0099e6' },
+  { label: 'Black', value: '#1f1f1f' },
+  { label: 'Dark Gray', value: '#444444' },
+  { label: 'White', value: '#ffffff' },
+  { label: 'Accent Green', value: '#107c10' },
+  { label: 'Accent Purple', value: '#6b2fa0' },
+  { label: 'Custom', value: '' },
+];
+
+const PRESET_START_BTN_TEXT_COLORS = [
+  { label: 'White (Default)', value: '#ffffff' },
+  { label: 'Light Gray', value: '#e0e0e0' },
+  { label: 'Dark', value: '#1f1f1f' },
+  { label: 'Black', value: '#000000' },
+  { label: 'Custom', value: '' },
+];
+
 @Component({
   selector: 'app-settings',
   imports: [
@@ -66,6 +106,7 @@ const PRESET_WINDOW_TEXT_COLORS = [
     MatSelectModule,
     MatSlideToggleModule,
     MatSnackBarModule,
+    MatTabsModule,
   ],
   templateUrl: './settings.html',
   styleUrl: './settings.scss',
@@ -97,6 +138,10 @@ export class Settings {
 
   presetWindowBgColors = PRESET_WINDOW_BG_COLORS;
   presetWindowTextColors = PRESET_WINDOW_TEXT_COLORS;
+  presetTaskbarBgColors = PRESET_TASKBAR_BG_COLORS;
+  presetTaskbarTextColors = PRESET_TASKBAR_TEXT_COLORS;
+  presetStartBtnBgColors = PRESET_START_BTN_BG_COLORS;
+  presetStartBtnTextColors = PRESET_START_BTN_TEXT_COLORS;
 
   selectedWindowBgPreset = signal(
     PRESET_WINDOW_BG_COLORS.find((p) => p.value === this.settingsService.windowBgColor()) ??
@@ -109,6 +154,30 @@ export class Settings {
       PRESET_WINDOW_TEXT_COLORS.at(-1)!,
   );
   customWindowTextColor = signal(this.settingsService.windowTextColor());
+
+  selectedTaskbarBgPreset = signal(
+    PRESET_TASKBAR_BG_COLORS.find((p) => p.value === this.settingsService.taskbarBgColor()) ??
+      PRESET_TASKBAR_BG_COLORS.at(-1)!,
+  );
+  customTaskbarBgColor = signal(this.settingsService.taskbarBgColor());
+
+  selectedTaskbarTextPreset = signal(
+    PRESET_TASKBAR_TEXT_COLORS.find((p) => p.value === this.settingsService.taskbarTextColor()) ??
+      PRESET_TASKBAR_TEXT_COLORS.at(-1)!,
+  );
+  customTaskbarTextColor = signal(this.settingsService.taskbarTextColor());
+
+  selectedStartBtnBgPreset = signal(
+    PRESET_START_BTN_BG_COLORS.find((p) => p.value === this.settingsService.startBtnBgColor()) ??
+      PRESET_START_BTN_BG_COLORS.at(-1)!,
+  );
+  customStartBtnBgColor = signal(this.settingsService.startBtnBgColor());
+
+  selectedStartBtnTextPreset = signal(
+    PRESET_START_BTN_TEXT_COLORS.find((p) => p.value === this.settingsService.startBtnTextColor()) ??
+      PRESET_START_BTN_TEXT_COLORS.at(-1)!,
+  );
+  customStartBtnTextColor = signal(this.settingsService.startBtnTextColor());
 
   get previewColor(): string {
     return this.selectedPreset().value || this.customColor();
@@ -124,6 +193,22 @@ export class Settings {
 
   get previewWindowTextColor(): string {
     return this.selectedWindowTextPreset().value || this.customWindowTextColor();
+  }
+
+  get previewTaskbarBgColor(): string {
+    return this.selectedTaskbarBgPreset().value || this.customTaskbarBgColor();
+  }
+
+  get previewTaskbarTextColor(): string {
+    return this.selectedTaskbarTextPreset().value || this.customTaskbarTextColor();
+  }
+
+  get previewStartBtnBgColor(): string {
+    return this.selectedStartBtnBgPreset().value || this.customStartBtnBgColor();
+  }
+
+  get previewStartBtnTextColor(): string {
+    return this.selectedStartBtnTextPreset().value || this.customStartBtnTextColor();
   }
 
   onPresetChange(preset: (typeof PRESET_COLORS)[0]) {
@@ -190,6 +275,46 @@ export class Settings {
     this.selectedWindowTextPreset.set(PRESET_WINDOW_TEXT_COLORS.at(-1)!);
   }
 
+  onTaskbarBgPresetChange(preset: (typeof PRESET_TASKBAR_BG_COLORS)[0]) {
+    this.selectedTaskbarBgPreset.set(preset);
+    if (preset.value) this.customTaskbarBgColor.set(preset.value);
+  }
+
+  onTaskbarBgCustomChange(value: string) {
+    this.customTaskbarBgColor.set(value);
+    this.selectedTaskbarBgPreset.set(PRESET_TASKBAR_BG_COLORS.at(-1)!);
+  }
+
+  onTaskbarTextPresetChange(preset: (typeof PRESET_TASKBAR_TEXT_COLORS)[0]) {
+    this.selectedTaskbarTextPreset.set(preset);
+    if (preset.value) this.customTaskbarTextColor.set(preset.value);
+  }
+
+  onTaskbarTextCustomChange(value: string) {
+    this.customTaskbarTextColor.set(value);
+    this.selectedTaskbarTextPreset.set(PRESET_TASKBAR_TEXT_COLORS.at(-1)!);
+  }
+
+  onStartBtnBgPresetChange(preset: (typeof PRESET_START_BTN_BG_COLORS)[0]) {
+    this.selectedStartBtnBgPreset.set(preset);
+    if (preset.value) this.customStartBtnBgColor.set(preset.value);
+  }
+
+  onStartBtnBgCustomChange(value: string) {
+    this.customStartBtnBgColor.set(value);
+    this.selectedStartBtnBgPreset.set(PRESET_START_BTN_BG_COLORS.at(-1)!);
+  }
+
+  onStartBtnTextPresetChange(preset: (typeof PRESET_START_BTN_TEXT_COLORS)[0]) {
+    this.selectedStartBtnTextPreset.set(preset);
+    if (preset.value) this.customStartBtnTextColor.set(preset.value);
+  }
+
+  onStartBtnTextCustomChange(value: string) {
+    this.customStartBtnTextColor.set(value);
+    this.selectedStartBtnTextPreset.set(PRESET_START_BTN_TEXT_COLORS.at(-1)!);
+  }
+
   save() {
     this.settingsService.setBackgroundColor(this.previewColor);
     this.settingsService.setTextColor(this.previewTextColor);
@@ -199,6 +324,10 @@ export class Settings {
     this.settingsService.setShowSeconds(this.showSeconds());
     this.settingsService.setWindowBgColor(this.previewWindowBgColor);
     this.settingsService.setWindowTextColor(this.previewWindowTextColor);
+    this.settingsService.setTaskbarBgColor(this.previewTaskbarBgColor);
+    this.settingsService.setTaskbarTextColor(this.previewTaskbarTextColor);
+    this.settingsService.setStartBtnBgColor(this.previewStartBtnBgColor);
+    this.settingsService.setStartBtnTextColor(this.previewStartBtnTextColor);
     this.snackBar.open('Settings saved', '', { duration: 2000 });
   }
 
@@ -215,6 +344,14 @@ export class Settings {
     this.customWindowBgColor.set(PRESET_WINDOW_BG_COLORS[0].value);
     this.selectedWindowTextPreset.set(PRESET_WINDOW_TEXT_COLORS[0]);
     this.customWindowTextColor.set(PRESET_WINDOW_TEXT_COLORS[0].value);
+    this.selectedTaskbarBgPreset.set(PRESET_TASKBAR_BG_COLORS[0]);
+    this.customTaskbarBgColor.set(PRESET_TASKBAR_BG_COLORS[0].value);
+    this.selectedTaskbarTextPreset.set(PRESET_TASKBAR_TEXT_COLORS[0]);
+    this.customTaskbarTextColor.set(PRESET_TASKBAR_TEXT_COLORS[0].value);
+    this.selectedStartBtnBgPreset.set(PRESET_START_BTN_BG_COLORS[0]);
+    this.customStartBtnBgColor.set(PRESET_START_BTN_BG_COLORS[0].value);
+    this.selectedStartBtnTextPreset.set(PRESET_START_BTN_TEXT_COLORS[0]);
+    this.customStartBtnTextColor.set(PRESET_START_BTN_TEXT_COLORS[0].value);
   }
 
   comparePreset(a: { value: string }, b: { value: string }): boolean {

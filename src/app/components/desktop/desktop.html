@@ -117,8 +117,14 @@
 
 <!-- Start Menu -->
 @if (startMenuOpen()) {
-  <div class="start-menu" role="menu" aria-label="Start Menu">
-    <div class="start-menu-header">
+  <div class="start-menu" role="menu" aria-label="Start Menu"
+       [style.background]="taskbarBgColor()"
+       [style.color]="taskbarTextColor()"
+       [style.border-color]="taskbarTextColor() + '22'">
+    <div class="start-menu-header"
+         [style.background]="taskbarBgColor()"
+         [style.color]="taskbarTextColor()"
+         [style.border-bottom]="'1px solid ' + taskbarTextColor() + '22'">
       @if (currentUser()) {
         <span class="start-menu-user">{{ currentUser()!.name }}</span>
         <span class="start-menu-level">{{ currentUser()!.level }}</span>
@@ -188,7 +194,10 @@
 }
 
 <!-- Taskbar -->
-<div class="taskbar" role="toolbar" aria-label="Taskbar">
+<div class="taskbar" role="toolbar" aria-label="Taskbar"
+     [style.background]="taskbarBgColor()"
+     [style.color]="taskbarTextColor()"
+     [style.border-top]="'1px solid ' + taskbarBgColor()">
   <!-- Start Button -->
   <button
     class="start-btn"
@@ -197,6 +206,8 @@
     aria-haspopup="menu"
     [attr.aria-expanded]="startMenuOpen()"
     type="button"
+    [style.background]="startBtnBgColor()"
+    [style.color]="startBtnTextColor()"
   >
     <span class="start-btn-icon">&#x229E;</span>
     <span>Start</span>

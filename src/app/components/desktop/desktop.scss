@@ -218,20 +218,20 @@
   left: 0;
   bottom: 48px;
   width: 260px;
-  background: #1e3a5f;
-  border: 1px solid #2d5f99;
+  background: #f9f9f9;
+  border: 1px solid #d0d0d0;
   border-radius: 0 8px 0 0;
-  box-shadow: 4px -4px 24px rgba(0, 0, 0, 0.5);
+  box-shadow: 4px -4px 24px rgba(0, 0, 0, 0.18);
   z-index: 1001;
   overflow: hidden;
-  color: #fff;
+  color: #1f1f1f;
   display: flex;
   flex-direction: column;
 }
 
 .start-menu-header {
   padding: 12px 16px;
-  background: linear-gradient(180deg, #2d7dc8 0%, #1a5fa3 100%);
+  background: #e8e8e8;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -239,6 +239,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  color: inherit;
 }
 
 .start-menu-user {
@@ -250,7 +251,7 @@
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.08);
   padding: 2px 7px;
   border-radius: 20px;
   letter-spacing: 0.07em;
@@ -262,16 +263,16 @@
 }
 
 .start-menu-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 4px 0;
 }
 
 .start-menu-logout {
-  color: #ffb4b4;
+  color: #c0392b;
 
   &:hover {
-    background: rgba(220, 50, 50, 0.25);
-    color: #ff6b6b;
+    background: rgba(220, 50, 50, 0.12);
+    color: #e74c3c;
   }
 }
 
@@ -291,7 +292,7 @@
   padding: 10px 16px;
   background: transparent;
   border: none;
-  color: #fff;
+  color: inherit;
   font-size: 14px;
   cursor: pointer;
   text-align: left;
@@ -299,11 +300,11 @@
 }
 
 .start-menu-item:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .start-menu-item:focus-visible {
-  outline: 2px solid #7eb8f7;
+  outline: 2px solid #0078d4;
   outline-offset: -2px;
 }
 
@@ -321,7 +322,7 @@
 }
 
 .start-menu-item--group.start-menu-item--active {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .start-menu-arrow {
@@ -338,18 +339,18 @@
 }
 
 .start-submenu {
-  background: rgba(0, 0, 0, 0.25);
-  border-left: 2px solid rgba(255,255,255,0.12);
+  background: rgba(0, 0, 0, 0.04);
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
   margin: 0 0 2px 0;
 }
 
 .start-submenu-item {
   padding-left: 36px;
   font-size: 13px;
-  opacity: 0.9;
+  opacity: 0.85;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(0, 0, 0, 0.06);
     opacity: 1;
   }
 }
@@ -361,15 +362,15 @@
   left: 0;
   right: 0;
   height: 48px;
-  background: rgba(15, 30, 50, 0.95);
+  background: #f3f3f3;
   backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid #d0d0d0;
   display: flex;
   align-items: center;
   gap: 4px;
   padding: 0 8px;
   z-index: 999;
-  color: #fff;
+  color: #1f1f1f;
 }
 
 /* ===== Start Button ===== */
@@ -385,16 +386,16 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.12s;
+  transition: filter 0.12s;
   flex-shrink: 0;
 }
 
 .start-btn:hover {
-  background: #106ebe;
+  filter: brightness(0.88);
 }
 
 .start-btn.active {
-  background: #005a9e;
+  filter: brightness(0.78);
 }
 
 .start-btn:focus-visible {
@@ -411,7 +412,7 @@
 .taskbar-divider {
   width: 1px;
   height: 28px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.15);
   flex-shrink: 0;
   margin: 0 4px;
 }
@@ -426,10 +427,10 @@
 
 .taskbar-btn {
   padding: 4px 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 4px;
-  color: #fff;
+  color: inherit;
   font-size: 12px;
   cursor: pointer;
   white-space: nowrap;
@@ -440,18 +441,18 @@
 }
 
 .taskbar-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .taskbar-btn:focus-visible {
-  outline: 2px solid #7eb8f7;
+  outline: 2px solid #0078d4;
   outline-offset: 2px;
 }
 
 .taskbar-btn-minimized {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.5);
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.06);
+  opacity: 0.5;
 }
 
 /* ===== Taskbar Clock ===== */
@@ -459,7 +460,7 @@
   font-size: 13px;
   font-weight: 600;
   padding: 4px 12px;
-  color: rgba(255, 255, 255, 0.9);
+  color: inherit;
   flex-shrink: 0;
   letter-spacing: 0.04em;
 }

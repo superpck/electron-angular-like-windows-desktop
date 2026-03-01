@@ -12,6 +12,10 @@ export interface DesktopSettings {
   showSeconds: boolean;
   windowBgColor: string;
   windowTextColor: string;
+  taskbarBgColor: string;
+  taskbarTextColor: string;
+  startBtnBgColor: string;
+  startBtnTextColor: string;
 }
 
 const STORAGE_KEY = 'desktop-settings';
@@ -25,6 +29,10 @@ const DEFAULTS: DesktopSettings = {
   showSeconds: false,
   windowBgColor: '#ffffff',
   windowTextColor: '#222222',
+  taskbarBgColor: '#f3f3f3',
+  taskbarTextColor: '#1f1f1f',
+  startBtnBgColor: '#0067c0',
+  startBtnTextColor: '#ffffff',
 };
 
 @Injectable({ providedIn: 'root' })
@@ -41,6 +49,10 @@ export class DesktopSettingsService {
   readonly showSeconds = computed(() => this._settings().showSeconds);
   readonly windowBgColor = computed(() => this._settings().windowBgColor);
   readonly windowTextColor = computed(() => this._settings().windowTextColor);
+  readonly taskbarBgColor = computed(() => this._settings().taskbarBgColor);
+  readonly taskbarTextColor = computed(() => this._settings().taskbarTextColor);
+  readonly startBtnBgColor = computed(() => this._settings().startBtnBgColor);
+  readonly startBtnTextColor = computed(() => this._settings().startBtnTextColor);
 
   constructor() {
     effect(() => {
@@ -78,6 +90,22 @@ export class DesktopSettingsService {
 
   setWindowTextColor(color: string) {
     this._settings.update((s) => ({ ...s, windowTextColor: color }));
+  }
+
+  setTaskbarBgColor(color: string) {
+    this._settings.update((s) => ({ ...s, taskbarBgColor: color }));
+  }
+
+  setTaskbarTextColor(color: string) {
+    this._settings.update((s) => ({ ...s, taskbarTextColor: color }));
+  }
+
+  setStartBtnBgColor(color: string) {
+    this._settings.update((s) => ({ ...s, startBtnBgColor: color }));
+  }
+
+  setStartBtnTextColor(color: string) {
+    this._settings.update((s) => ({ ...s, startBtnTextColor: color }));
   }
 
   formatTime(date: Date): string {
