@@ -49,14 +49,6 @@ export interface AppItem {
 // ─────────────────────────────────────────────────────────────────────────────
 export const DESKTOP_ICONS: AppItem[] = [
   {
-    id: 'profile',
-    label: 'My Profile',
-    icon: 'assets/images/profile1.png',
-    component: Profile,
-    defaultWidth: 500,
-    defaultHeight: 600,
-  },
-  {
     id: 'user',
     label: 'User List',
     icon: 'assets/images/user1.png',
@@ -120,7 +112,7 @@ export const START_MENU_ITEMS: AppItem[] = [
   },
   {
     id: 'profile',
-    label: 'Profile',
+    label: 'My Profile',
     icon: 'assets/images/profile1.png',
     component: Profile,
     defaultWidth: 500,
@@ -133,6 +125,14 @@ export const START_MENU_ITEMS: AppItem[] = [
     component: User,
     defaultWidth: 0,  // 0 = open maximized
     defaultHeight: 0,
+  },
+  {
+    id: 'chat',
+    label: 'Chat',
+    icon: 'assets/images/chat.png',
+    component: Chat,
+    defaultWidth: 900,
+    defaultHeight: 600,
   },
   // ── Submenu group example ─────────────────────────────────────────────────
   {
@@ -167,14 +167,6 @@ export const START_MENU_ITEMS: AppItem[] = [
       },
       // ↓ ADD NEW SUBMENU CHILDREN HERE ↓
     ],
-  },
-  {
-    id: 'chat',
-    label: 'Chat',
-    icon: 'assets/images/chat.png',
-    component: Chat,
-    defaultWidth: 900,
-    defaultHeight: 600,
   },
   // ↓ ADD NEW START MENU ITEMS HERE ↓
 ];
