@@ -50,6 +50,10 @@
         <span class="info-value">{{ config.appName }}</span>
       </div>
       <div class="info-row">
+        <span class="info-label">Platform</span>
+        <span class="info-value">CK Platform</span>
+      </div>
+      <div class="info-row">
         <span class="info-label">Version</span>
         <span class="info-value">{{ config.appVersion }}</span>
       </div>
@@ -58,15 +62,277 @@
         <span class="info-value">{{ config.appSubversion }}</span>
       </div>
       <div class="info-row">
-        <span class="info-label">Platform</span>
-        <span class="info-value">Electron + Angular</span>
+        <span class="info-label">Angular</span>
+        <span class="info-value">v{{ angularVersion }}</span>
       </div>
     </div>
   </section>
 
   <mat-divider />
 
-  <!-- Copilot credit -->
+  <!-- DEBUG PANEL: shown only when preload failed -->
+  @if (!debugInfo.hasApi) {
+  <section class="about-section debug-panel m-4 rounded-lg">
+    <h2 class="about-section-title">
+      <mat-icon aria-hidden="true">bug_report</mat-icon>
+      Debug Info
+    </h2>
+    <div class="info-grid">
+      <div class="info-row">
+        <span class="info-label">window</span>
+        <span class="info-value">{{ debugInfo.hasWindow }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">electronAPI</span>
+        <span class="info-value">{{ debugInfo.hasApi }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">API keys</span>
+        <span class="info-value">{{ debugInfo.apiKeys.join(', ') || '(none)' }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">preloadStep</span>
+        <span class="info-value">{{ debugInfo.preloadStep }}</span>
+      </div>
+      @if (debugInfo.preloadError) {
+        <div class="info-row">
+          <span class="info-label">preloadError</span>
+          <span class="info-value info-value--wrap debug-error">{{ debugInfo.preloadError }}</span>
+        </div>
+      }
+      <div class="info-row">
+        <span class="info-label">systemInfo</span>
+        <span class="info-value">{{ systemInfo() ? 'loaded' : 'null' }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">userAgent</span>
+        <span class="info-value info-value--wrap">{{ debugInfo.userAgent }}</span>
+      </div>
+      @if (preloadDebug(); as pd) {
+        <div class="info-row">
+          <span class="info-label">preload path</span>
+          <span class="info-value info-value--wrap">{{ pd.preloadPath }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">preload exists</span>
+          <span class="info-value">{{ pd.preloadExists }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">resourcesPath</span>
+          <span class="info-value info-value--wrap">{{ pd.resourcesPath }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">log path</span>
+          <span class="info-value info-value--wrap">{{ pd.logPath }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">log</span>
+          <span class="info-value info-value--wrap debug-log">{{ pd.logContent }}</span>
+        </div>
+      }
+    </div>
+  </section>
+  }
+
+  <mat-divider />
+
+  <!-- System Info (Electron only) -->
+  @if (systemInfo(); as sys) {
+
+    <!-- Computer -->
+    <section class="about-section">
+      <h2 class="about-section-title">
+        <mat-icon aria-hidden="true">computer</mat-icon>
+        Computer
+      </h2>
+      <div class="info-grid">
+        <div class="info-row">
+          <span class="info-label">Hostname</span>
+          <span class="info-value">{{ sys.computer.hostname }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">OS</span>
+          <span class="info-value">{{ sys.computer.os }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Platform</span>
+          <span class="info-value">{{ sys.computer.platform }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Architecture</span>
+          <span class="info-value">{{ sys.computer.arch }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Uptime</span>
+          <span class="info-value">{{ formatUptime(sys.computer.uptime) }}</span>
+        </div>
+      </div>
+    </section>
+
+    <mat-divider />
+
+    <!-- CPU -->
+    <section class="about-section">
+      <h2 class="about-section-title">
+        <mat-icon aria-hidden="true">memory</mat-icon>
+        CPU
+      </h2>
+      <div class="info-grid">
+        <div class="info-row">
+          <span class="info-label">Model</span>
+          <span class="info-value info-value--wrap">{{ sys.cpu.model }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Cores</span>
+          <span class="info-value">{{ sys.cpu.cores }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Speed</span>
+          <span class="info-value">{{ sys.cpu.speed }} MHz</span>
+        </div>
+        <div class="info-row info-row--bar">
+          <span class="info-label">Usage</span>
+          <div class="resource-bar-wrap" role="meter" [attr.aria-valuenow]="sys.cpu.usage" aria-valuemin="0" aria-valuemax="100" [attr.aria-label]="'CPU usage ' + sys.cpu.usage + '%'">
+            <div class="resource-bar">
+              <div class="resource-bar__fill resource-bar__fill--cpu" [style.width.%]="sys.cpu.usage"></div>
+            </div>
+            <span class="resource-bar__label">{{ sys.cpu.usage }}%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <mat-divider />
+
+    <!-- Memory -->
+    <section class="about-section">
+      <h2 class="about-section-title">
+        <mat-icon aria-hidden="true">storage</mat-icon>
+        Memory
+      </h2>
+      <div class="info-grid">
+        <div class="info-row">
+          <span class="info-label">Total</span>
+          <span class="info-value">{{ formatBytes(sys.memory.total) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Used</span>
+          <span class="info-value">{{ formatBytes(sys.memory.total - sys.memory.free) }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Free</span>
+          <span class="info-value">{{ formatBytes(sys.memory.free) }}</span>
+        </div>
+        <div class="info-row info-row--bar">
+          <span class="info-label">Usage</span>
+          <div class="resource-bar-wrap"
+               role="meter"
+               [attr.aria-valuenow]="(sys.memory.total - sys.memory.free) / sys.memory.total * 100 | number:'1.0-0'"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               [attr.aria-label]="'Memory usage ' + ((sys.memory.total - sys.memory.free) / sys.memory.total * 100 | number:'1.0-0') + '%'">
+            <div class="resource-bar">
+              <div class="resource-bar__fill resource-bar__fill--mem"
+                   [style.width.%]="(sys.memory.total - sys.memory.free) / sys.memory.total * 100"></div>
+            </div>
+            <span class="resource-bar__label">{{ (sys.memory.total - sys.memory.free) / sys.memory.total * 100 | number:'1.0-0' }}%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <mat-divider />
+
+    <!-- Disk -->
+    <section class="about-section">
+      <h2 class="about-section-title">
+        <mat-icon aria-hidden="true">hard_drive</mat-icon>
+        Storage
+      </h2>
+      <div class="disk-list">
+        @for (disk of sys.disks; track disk.mount) {
+          <div class="disk-card">
+            <div class="disk-card__header">
+              <mat-icon class="disk-card__icon" aria-hidden="true">hard_drive</mat-icon>
+              <span class="disk-card__mount">{{ disk.mount }}</span>
+              <span class="disk-card__size">{{ formatBytes(disk.total) }}</span>
+            </div>
+            <div class="resource-bar-wrap"
+                 role="meter"
+                 [attr.aria-valuenow]="(disk.total - disk.free) / disk.total * 100 | number:'1.0-0'"
+                 aria-valuemin="0" aria-valuemax="100"
+                 [attr.aria-label]="disk.mount + ' usage ' + ((disk.total - disk.free) / disk.total * 100 | number:'1.0-0') + '%'">
+              <div class="resource-bar">
+                <div class="resource-bar__fill resource-bar__fill--disk"
+                     [style.width.%]="(disk.total - disk.free) / disk.total * 100"></div>
+              </div>
+              <span class="resource-bar__label">{{ (disk.total - disk.free) / disk.total * 100 | number:'1.0-0' }}%</span>
+            </div>
+            <div class="disk-card__detail">
+              <span>Used: {{ formatBytes(disk.total - disk.free) }}</span>
+              <span>Free: {{ formatBytes(disk.free) }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <mat-divider />
+
+    <!-- Network -->
+    <section class="about-section">
+      <h2 class="about-section-title">
+        <mat-icon aria-hidden="true">wifi</mat-icon>
+        Network
+      </h2>
+      <div class="network-list">
+        @for (iface of sys.network; track iface.address) {
+          <div class="network-card">
+            <div class="network-card__header">
+              <mat-icon class="network-card__icon" aria-hidden="true">lan</mat-icon>
+              <span class="network-card__name">{{ iface.name }}</span>
+              <span class="network-card__family">IPv{{ iface.family === 'IPv4' ? '4' : '6' }}</span>
+            </div>
+            <div class="network-card__detail">
+              <span class="network-card__detail-label">IP</span>
+              <span class="network-card__detail-value">{{ iface.address }}</span>
+            </div>
+            <div class="network-card__detail">
+              <span class="network-card__detail-label">MAC</span>
+              <span class="network-card__detail-value">{{ iface.mac }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+
+    <mat-divider />
+
+    <!-- Runtime Versions -->
+    <section class="about-section">
+      <h2 class="about-section-title">
+        <mat-icon aria-hidden="true">hub</mat-icon>
+        Runtime
+      </h2>
+      <div class="info-grid">
+        <div class="info-row">
+          <span class="info-label">Electron</span>
+          <span class="info-value">v{{ sys.versions.electron }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Chromium</span>
+          <span class="info-value">v{{ sys.versions.chrome }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Node.js</span>
+          <span class="info-value">v{{ sys.versions.node }}</span>
+        </div>
+      </div>
+    </section>
+
+  }
+
+  <mat-divider />
   <section class="about-section about-copilot">
     <p class="copilot-text">
       <span class="copilot-label">Built with</span>

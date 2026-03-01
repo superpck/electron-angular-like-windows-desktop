@@ -62,10 +62,10 @@
               aria-label="Minimize"
               type="button"
             >
-              &#x2212;
+              <span class="text-xl">&#x2212;</span>
             </button>
             <button
-              class="win-btn win-btn-max"
+              class="win-btn win-btn-max text-2xl"
               (click)="toggleMaximize(win.id)"
               (mousedown)="$event.stopPropagation()"
               [title]="win.maximized ? 'Restore' : 'Maximize'"
@@ -73,9 +73,9 @@
               type="button"
             >
               @if (win.maximized) {
-                &#x2752;
+                <span class="text-2xl">&#x2752;</span>
               } @else {
-                &#x25A1;
+                <span class="text-2xl">&#x25A1;</span>
               }
             </button>
             <button
@@ -222,7 +222,9 @@
   </div>
 
   <!-- Clock -->
-  <div class="taskbar-clock" role="timer" aria-live="off">{{ currentTime() }}</div>
+  <div class="taskbar-clock" role="timer" aria-live="off">
+    ⏱ {{ currentTime() }}
+  </div>
 </div>
 
 <!-- Taskbar context menu -->
@@ -239,20 +241,20 @@
       @if (win.id === contextMenu()!.id) {
         <li role="none">
           <button role="menuitem" type="button" class="ctx-item" (click)="toggleMinimize(win.id); closeContextMenu()">
-            <span class="ctx-icon">&#x2212;</span>
+            <span class="ctx-icon text-2xl">&#x2212;</span>
             {{ win.minimized ? 'Restore' : 'Minimize' }}
           </button>
         </li>
         <li role="none">
           <button role="menuitem" type="button" class="ctx-item" (click)="toggleMaximize(win.id); closeContextMenu()">
-            <span class="ctx-icon">{{ win.maximized ? '&#x2752;' : '&#x25A1;' }}</span>
+            <span class="ctx-icon text-2xl">{{ win.maximized ? '&#x2752;' : '&#x25A1;' }}</span>
             {{ win.maximized ? 'Restore' : 'Maximize' }}
           </button>
         </li>
         <li class="ctx-divider" role="separator"></li>
         <li role="none">
           <button role="menuitem" type="button" class="ctx-item ctx-item--danger" (click)="closeWindow(win.id); closeContextMenu()">
-            <span class="ctx-icon">&#x2715;</span>
+            <span class="ctx-icon text-2xl">&#x2715;</span>
             Close
           </button>
         </li>

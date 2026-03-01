@@ -214,6 +214,212 @@
   flex-shrink: 0;
 }
 
+/* ===== Debug Panel ===== */
+.debug-panel {
+  background: #fff8e1;
+  border: 2px dashed #f59e0b;
+
+  .about-section-title {
+    color: #b45309;
+    mat-icon { color: #f59e0b; }
+  }
+}
+
+.debug-error {
+  color: #dc2626;
+  font-family: monospace;
+  font-size: 11px;
+}
+
+.debug-log {
+  font-family: monospace;
+  font-size: 11px;
+  color: #374151;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+/* ===== Resource Bar ===== */
+.info-row--bar {
+  align-items: center;
+  gap: 12px;
+}
+
+.info-value--wrap {
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.resource-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.resource-bar {
+  flex: 1;
+  height: 8px;
+  background: #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.resource-bar__fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+
+  &--cpu {
+    background: linear-gradient(90deg, #0078d4, #00b4d8);
+  }
+
+  &--mem {
+    background: linear-gradient(90deg, #107c10, #4caf50);
+  }
+
+  &--disk {
+    background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  }
+}
+
+.resource-bar__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ===== Disk ===== */
+.disk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.disk-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.1);
+  }
+}
+
+.disk-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.disk-card__icon {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  color: #7c3aed;
+}
+
+.disk-card__mount {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  flex: 1;
+}
+
+.disk-card__size {
+  font-size: 12px;
+  color: #888;
+}
+
+.disk-card__detail {
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: #888;
+}
+
+/* ===== Network ===== */
+.network-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.network-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &:hover {
+    border-color: #0078d4;
+    box-shadow: 0 2px 8px rgba(0, 120, 212, 0.1);
+  }
+}
+
+.network-card__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.network-card__icon {
+  font-size: 16px !important;
+  width: 16px !important;
+  height: 16px !important;
+  color: #0078d4;
+}
+
+.network-card__name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  flex: 1;
+}
+
+.network-card__family {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: #e3f2fd;
+  color: #0078d4;
+}
+
+.network-card__detail {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.network-card__detail-label {
+  font-size: 11px;
+  color: #aaa;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.network-card__detail-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: #444;
+  font-family: monospace;
+  word-break: break-all;
+}
+
 /* ===== Footer ===== */
 .about-footer {
   display: flex;
