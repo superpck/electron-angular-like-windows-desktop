@@ -33,7 +33,7 @@ A desktop environment built with **Angular 21** + **Electron**, styled after a W
 
 ---
 
-## � Screenshots
+## 🖥 Screenshots
 
 ### 1. Login Screen
 ![Login Screen](public/documents/login.png)
