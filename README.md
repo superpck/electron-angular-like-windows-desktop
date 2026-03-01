@@ -18,6 +18,8 @@ A desktop environment built with **Angular 21** + **Electron**, styled after a W
 | 🪟 Floating windows | Draggable (clamped), resizable, minimize / maximize / close |
 | 📋 Start Menu | Multi-level submenu support |
 | 🖱 Taskbar context menu | Right-click any window button → Minimize, Maximize, Close |
+| � Taskbar window icons | Each open-window button shows the app icon |
+| 🎨 Desktop Settings | Tabbed settings: Desktop (bg, text, window title bar, clock) + Taskbar (bg, text, Start button bg/text) with live preview |
 | 🔔 `MyAlert` | Promise-based modal dialogs (success, info, warning, error, confirm, input) |
 | 🍞 `MyToastr` | Signal-based toast notifications with auto-dismiss & progress bar |
 | 🗂 `MyTabs` | Reusable tab component with `line` and `pill` variants |
@@ -26,6 +28,7 @@ A desktop environment built with **Angular 21** + **Electron**, styled after a W
 | 👤 Profile | Modern profile page with editable fields |
 | 👥 User management | User list window |
 | 🔑 Auth | Login page with route guards |
+| 💻 About | System info (CPU, Memory, Storage, Network) via Electron preload |
 
 ---
 
@@ -162,6 +165,21 @@ Add windows by editing `src/app/configs/desktop-menu.ts`:
 - **Angular Material 21** — Azure/Blue theme
 - **Tailwind CSS 4** — utility-first styling
 - **TypeScript 5** — strict mode
+
+---
+
+## � Changelog
+
+### v1.1.0 — 2026-03-01
+- **Taskbar**: each open-window button now displays the app icon alongside the title
+- **Settings**: tabbed layout (Desktop / Taskbar); new Taskbar tab with bg colour, text/icon colour, and Start button bg/text colour pickers with live preview
+- **Window controls**: min/max/close buttons inherit the title bar text colour; hover uses `currentColor` overlay; close-hover still forces red
+- **System info (About)**: CPU, memory, storage (disk), network, runtime info via Electron preload (`sandbox: false`)
+- **HDD section**: per-mount progress bars using `df -k` / `wmic`
+- **Debug panel**: shown only when `window.electronAPI` is unavailable
+
+### v1.0.0 — 2026-03-01
+- Initial release
 
 ---
 
