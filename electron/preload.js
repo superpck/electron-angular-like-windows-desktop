@@ -47,15 +47,36 @@ function getCpuUsagePercent() {
   return totalDiff === 0 ? 0 : Math.max(0, Math.round((1 - idleDiff / totalDiff) * 100));
 }
 
+function getDiskVolumeName(device, mount) {
+  // macOS: ask diskutil for the real volume name
+  if (os.platform() === 'darwin') {
+    try {
+      const out = execSync(`diskutil info "${mount}" 2>/dev/null || diskutil info "${device}" 2>/dev/null`, { timeout: 3000 }).toString();
+      const match = out.match(/Volume Name:\s*(.+)/);
+      if (match) return match[1].trim();
+    } catch (_) {}
+  }
+  // Linux / fallback: derive from mount path
+  if (mount === '/') return 'Root';
+  const parts = mount.split('/').filter(Boolean);
+  return parts[parts.length - 1] || mount;
+}
+
 function getDiskInfo() {
   const disks = [];
   try {
     if (os.platform() === 'win32') {
-      const out = execSync('wmic logicaldisk get caption,size,freespace /format:csv', { timeout: 3000 }).toString();
+      const out = execSync('wmic logicaldisk get caption,volumename,size,freespace /format:csv', { timeout: 3000 }).toString();
       for (const line of out.split('\n')) {
         const parts = line.trim().split(',');
+        // caption, freespace, size, volumename (csv header order varies — use caption as name fallback)
         if (parts.length >= 4 && parts[1] && /^[A-Z]:$/.test(parts[1])) {
-          disks.push({ mount: parts[1], total: Number(parts[3]) || 0, free: Number(parts[2]) || 0 });
+          const caption = parts[1];
+          const free    = Number(parts[2]) || 0;
+          const total   = Number(parts[3]) || 0;
+          const volName = (parts[4] || '').trim();
+          const name    = volName || `Drive (${caption})`;
+          disks.push({ name, mount: caption, total, free });
         }
       }
     } else {
@@ -64,11 +85,13 @@ function getDiskInfo() {
       for (const line of out.trim().split('\n')) {
         const cols = line.trim().split(/\s+/);
         if (cols.length >= 6) {
-          const total = Number(cols[1]) * 1024;
-          const used  = Number(cols[2]) * 1024;
-          const free  = Number(cols[3]) * 1024;
-          const mount = cols[5];
-          disks.push({ mount, total, free: free, used });
+          const device = cols[0];
+          const total  = Number(cols[1]) * 1024;
+          const used   = Number(cols[2]) * 1024;
+          const free   = Number(cols[3]) * 1024;
+          const mount  = cols[5];
+          const name   = getDiskVolumeName(device, mount);
+          disks.push({ name, mount, total, free, used });
         }
       }
     }

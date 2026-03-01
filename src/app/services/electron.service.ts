@@ -8,6 +8,7 @@ export interface NetworkInterface {
 }
 
 export interface DiskInfo {
+  name: string;
   mount: string;
   total: number;
   free: number;

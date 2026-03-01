@@ -254,9 +254,10 @@
           <div class="disk-card">
             <div class="disk-card__header">
               <mat-icon class="disk-card__icon" aria-hidden="true">hard_drive</mat-icon>
-              <span class="disk-card__mount">{{ disk.mount }}</span>
+              <span class="disk-card__mount">{{ disk.name }}</span>
               <span class="disk-card__size">{{ formatBytes(disk.total) }}</span>
             </div>
+            <div class="disk-card__path">{{ disk.mount }}</div>
             <div class="resource-bar-wrap"
                  role="meter"
                  [attr.aria-valuenow]="(disk.total - disk.free) / disk.total * 100 | number:'1.0-0'"
