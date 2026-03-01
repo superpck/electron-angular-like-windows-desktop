@@ -181,6 +181,7 @@ export class Desktop {
 
   closeWindow(id: string) {
     this.windows.update((wins) => wins.filter((w) => w.id !== id));
+    this.windowManagerService.notifyWindowClosed(id);
   }
 
   minimizeWindow(id: string) {

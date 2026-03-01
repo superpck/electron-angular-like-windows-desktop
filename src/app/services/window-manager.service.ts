@@ -5,6 +5,7 @@ import type { AppItem } from '../configs/desktop-menu';
 export class WindowManagerService {
   readonly openRequest = signal<AppItem | null>(null);
   readonly closeRequest = signal<string | null>(null);
+  readonly lastClosedWindow = signal<{ id: string; ts: number } | null>(null);
 
   requestOpen(item: AppItem): void {
     this.openRequest.set(item);
@@ -20,5 +21,9 @@ export class WindowManagerService {
 
   clearCloseRequest(): void {
     this.closeRequest.set(null);
+  }
+
+  notifyWindowClosed(windowId: string): void {
+    this.lastClosedWindow.set({ id: windowId, ts: Date.now() });
   }
 }

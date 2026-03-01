@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   computed,
+  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -16,6 +17,7 @@ import { UserService, RandomUser } from '../../services/user.service';
 import { WindowManagerService } from '../../services/window-manager.service';
 import { UserEdit } from './user-edit/user-edit';
 import { MyAlertService } from '../../shares/my-alert/my-alert.service';
+import { MyToastrService } from '../../shares/my-toastr/my-toastr.service';
 
 const USER_EDIT_ITEM = {
   id: 'user-edit',
@@ -37,6 +39,17 @@ export class User implements OnInit {
   private userService = inject(UserService);
   private windowManager = inject(WindowManagerService);
   private myAlert = inject(MyAlertService);
+  private toastr = inject(MyToastrService);
+
+  /** uuid of the user currently being edited — all edit/delete buttons are disabled while set */
+  readonly editingId = signal<string | null>(null);
+
+  // Clear editing lock when user-edit window is closed (X button or save)
+  private readonly _editLockEffect = effect(() => {
+    if (this.windowManager.lastClosedWindow()?.id === 'user-edit') {
+      this.editingId.set(null);
+    }
+  });
 
   readonly loading = this.userService.loading;
   readonly error = this.userService.error;
@@ -100,6 +113,7 @@ export class User implements OnInit {
   }
 
   editUser(user: RandomUser): void {
+    this.editingId.set(user.login.uuid);
     this.userService.setSelectedUser(user);
     this.windowManager.requestOpen(USER_EDIT_ITEM);
   }
@@ -111,6 +125,7 @@ export class User implements OnInit {
     );
     if (confirmed) {
       this.userService.deleteUser(user.login.uuid);
+      this.toastr.success(`Deleted "${user.name.first} ${user.name.last}" successfully`);
     }
   }
 

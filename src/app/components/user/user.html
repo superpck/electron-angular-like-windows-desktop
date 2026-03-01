@@ -67,6 +67,7 @@
                   [attr.aria-label]="'Edit ' + fullName(user)"
                   title="Edit"
                   type="button"
+                  [disabled]="editingId() !== null"
                 >
                   <mat-icon>edit</mat-icon>
                 </button>
@@ -77,6 +78,7 @@
                   title="Delete"
                   type="button"
                   class="btn-delete"
+                  [disabled]="editingId() !== null"
                 >
                   <mat-icon>delete</mat-icon>
                 </button>
